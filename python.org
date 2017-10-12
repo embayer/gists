@@ -1,0 +1,182 @@
+#+TITLE: python
+
+* __str__ & __repr__
+*__repr__* goal is to be unambiguous
+*__str__* goal is to be readable
+Container’s __str__ uses contained objects’ __repr__
+
+Implement __repr__ for any class you implement. This should be second nature.
+Implement __str__ if you think it would be useful to have a string version
+which errs on the side of more readability in favor of more ambiguity.
+
+* virtual environment
+#+BEGIN_SRC sh
+    python3 -m venv /path/to/venv-dir
+#+END_SRC
+
+* get filename without extension
+#+BEGIN_SRC python
+from os.path import basename, splitext
+fpath = '/path/to/file.txt'
+splitext(basename(self.fpath))[0]
+#+END_SRC
+
+* reserved keywords
+#+BEGIN_SRC python
+    import keyword
+    # test
+    keyword.iskeyword('break')
+    # list
+    keyword.kwlist
+#+END_SRC
+
+* url encode
+#+BEGIN_SRC python
+    from urllib.parse import quote
+    urllib.quote('/test', safe='')
+#+END_SRC
+
+* TODO set operations
+
+* TODO debugging
+
+* TODO functions
+https://docs.python.org/3/howto/functional.html
+** params, kwargs...
+** attrgetter
+** partial
+** methodcaller
+** modern replacements for map, reduce... 148
+
+* sorting
+
+** by aspect
+#+begin_src python
+    from operator import itemgetter
+
+    metro_data = [('Tokyo', 'JP'), ('Delhi NCR', 'IN')]
+    for city in sorted(metro_data, key=itemgetter(1)):
+        print(city)
+#+end_src
+
+* control structures
+
+** for
+#+begin_src python
+    def find(seq, target):
+        for i, value in enumerate(seq):
+            if value == target:
+                break
+        # case no-break
+        else:
+            return -1
+        return i
+#+end_src
+
+* special methods
+https://docs.python.org/3/reference/datamodel.html#special-method-names
+
+#+begin_src python
+    import collections
+
+    Card = collections.namedtuple('Card', ['rank', 'suit'])
+
+    class FrenchDeck:
+        ranks = [str(n) for n in range(2, 11)] + list('JQKA')
+        suits = 'spades diamonds clubs hearts'.split()
+
+        def __init__(self):
+            self._cards = [Card(rank, suit) for suit in self.suits
+                                            for rank in self.ranks]
+
+        def __len__(self):
+            return len(self._cards)
+
+        def __getitem__(self, position):
+            return self._cards[position]
+
+        deck = FrenchDeck()
+        deck[0]            # list like access
+        # start, stop, step
+        deck[12::13]       # slicing the aces
+        for card in deck:  # iterable (also for reverse())
+            print(card)
+        from random import choice
+        choice(deck)       # no need for custom random card function
+#+end_src
+
+
+* squences
+
+** string
+*** reverse
+#+begin_src python
+    'hello world'[::-1]
+#+end_src
+
+** tuple
+
+*** TODO unpacking
+
+*** named tuple
+Class that bundles some attributes without custom methods (like a struct).
+#+begin_src python
+    import collections
+    Card = collections.namedtuple('Card', ['rank', 'suit'])
+    # or
+    Card = collections.namedtuple('Card', 'rank suit')
+#+end_src
+
+** named slice
+#+begin_src python
+    price_summary = 'EUR 9,99'
+    currency_slice = slice(0, 3)
+    price_slice = slice(4, None)
+    currency = price_summary[currency_slice]
+    price = price_summary[price_slice]
+#+end_src
+
+** array
+** list
+*** [].sort
+**** key
+*** sorted([])
+** bisect
+*** bisect
+*** insort
+
+* collections
+** dequeue
+
+* requests
+** dump html file
+#+begin_src python
+    html = requests.get('https://example.com/')
+    def dump_html(html):
+        with open('dump.html', 'wb') as file:
+            for block in html.iter_content(1024):
+                file.write(block)
+#+end_src
+
+* openpyxl
+
+#+begin_src python
+    from openpyxl import Workbook
+
+    data = [
+            ['sheet-one-foo-data', 'sheet-one-bar-data']
+            ['sheet-two-foo-data', 'sheet-two-bar-data']
+           ]
+
+    wb = Workbook()
+    for sheet_idx, elem in enumerate(data):
+        sheet_name = 'sheet-{}'.format(sheet_idx + 1)
+        wb.create_sheet(sheet_name)
+        header = ['foo', 'bar']
+        wb[sheet_name].append(header)
+        for row in elem:
+            wb[sheet_name].append(elem)
+
+    del wb['Sheet']
+    wb.save(filename='excel.xlsx')
+#+end_src

@@ -1,0 +1,332 @@
+#+TITLE: shell tools
+
+* curl
+** list background images of a url
+#+BEGIN_SRC sh
+curl https://www.flickr.com/photos/megane_wakui/34521486394/sizes/k/|awk -F\" '{for(i=0;++i<=NF;){if($i ~ /^http/ && $i !~ "google\|cache:"){print $i}}}'|grep '.*\.\(jpg\|JPG\|png\|PNG\|gif\|GIF\)'
+#+END_SRC
+
+* ls
+** list certain extensions
+#+BEGIN_SRC sh
+ls *.{mp3,exe,mp4}
+#+END_SRC
+
+* ag
+
+** include files in the search that matches a pattern
+#+BEGIN_SRC sh
+    ag -G pattern searchterm
+#+END_SRC
+
+* awk
+
+** print all columns but the first
+#+BEGIN_SRC sh
+    awk '{for (i=2; i<NF; i++) printf $i " "; print $NF}'
+#+END_SRC
+
+** print all columns but the first 3
+#+BEGIN_SRC sh
+    awk '{ $1=""; $2=""; $3=""; print $0 }'
+#+END_SRC
+
+** use a regex as a field separator awk
+#+BEGIN_SRC sh
+    awk -F '[0-9][0-9]' '{print $2}'
+#+END_SRC
+
+** remove duplicate lines whilst keeping empty lines and order
+#+BEGIN_SRC sh
+    awk '!NF || !seen[$0]++'
+#+END_SRC
+
+** swap two columns
+#+BEGIN_SRC sh
+    awk ' { t = $1; $1 = $2; $2 = t; print; } ' input_file
+#+END_SRC
+
+* cut
+
+** cut from character 4 to the end
+#+BEGIN_SRC sh
+    cut -c 4-
+#+END_SRC
+
+* diff
+
+** diff sorted
+#+BEGIN_SRC sh
+    diff <(sort file_a) <(sort file_b)
+#+END_SRC
+
+** diff folders
+#+begin_src sh
+    diff -qr /path/to/folder1 /path/to/folder2
+#+end_src
+
+* less
+
+** better tail -f
+#+BEGIN_SRC sh
+    less +F
+#+END_SRC
+
+** help
+| <h> |
+
+* sed
+
+** strip out urls from html
+#+BEGIN_SRC sh
+    sed -n 's/.*href="\([^"]*\).*/\1/p' file
+#+END_SRC
+
+
+** delete lines containing pattern
+#+BEGIN_SRC sh
+    sed '/<pattern>/d' file
+#+END_SRC
+
+** delete lines not containing pattern a or b
+#+BEGIN_SRC sh
+    sed '/<a>\|<b>/!d' file
+#+END_SRC
+
+** delete all occurences of pattern
+#+BEGIN_SRC sh
+    sed 's/<pattern>//g'
+#+END_SRC
+
+** print the lines between two line numbers
+#+BEGIN_SRC sh
+    sed -n '5,10p' <filename>
+#+END_SRC
+
+** delete leading whitespace (spaces, tabs) from front of each line aligns all text flush left
+#+BEGIN_SRC sh
+    sed 's/^[ \t]*//'
+#+END_SRC
+
+** delete trailing whitespace (spaces, tabs) from end of each line
+#+BEGIN_SRC sh
+    sed 's/[ \t]*$//'
+#+END_SRC
+
+** delete BOTH leading and trailing whitespace from each line
+#+BEGIN_SRC sh
+    sed 's/^[ \t]*//;s/[ \t]*$//'
+#+END_SRC
+
+** delete lines longer than 15 chars
+#+BEGIN_SRC sh
+    sed '/.\{16\}/d'
+#+END_SRC
+
+** print only lines which match regular expression (emulates "grep")
+#+BEGIN_SRC sh
+ sed -n '/regexp/p'           # method 1
+ sed '/regexp/!d'             # method 2
+#+END_SRC
+
+** print only lines which do NOT match regexp (emulates "grep -v")
+#+BEGIN_SRC sh
+ sed -n '/regexp/!p'          # method 1, corresponds to above
+ sed '/regexp/d'              # method 2, simpler syntax
+#+END_SRC
+
+** substitute (find and replace) "foo" with "bar" on each line
+#+BEGIN_SRC sh
+ sed -i.bak 's/foo/bar/g' file.txt    # make the changes inline and create a backup of the original file before it does the changes in-place
+ sed 's/foo/bar/'             # replaces only 1st instance in a line
+ sed 's/foo/bar/4'            # replaces only 4th instance in a line
+ sed 's/foo/bar/g'            # replaces ALL instances in a line
+ sed 's/\(.*\)foo\(.*foo\)/\1bar\2/' # replace the next-to-last case
+ sed 's/\(.*\)foo/\1bar/'            # replace only the last case
+#+END_SRC
+
+** substitute "foo" with "bar" ONLY for lines which contain "baz"
+#+BEGIN_SRC sh
+ sed '/baz/s/foo/bar/g'
+#+END_SRC
+
+** substitute "foo" with "bar" EXCEPT for lines which contain "baz"
+#+BEGIN_SRC sh
+ sed '/baz/!s/foo/bar/g'
+#+END_SRC
+
+** change "scarlet" or "ruby" or "puce" to "red"
+#+BEGIN_SRC sh
+ sed 's/scarlet/red/g;s/ruby/red/g;s/puce/red/g'   # most seds
+ gsed 's/scarlet\|ruby\|puce/red/g'                # GNU sed only
+#+END_SRC
+
+** reverse order of lines (emulates "tac")
+#+BEGIN_SRC sh
+    # bug/feature in HHsed v1.5 causes blank lines to be deleted
+    sed '1!G;h;$!d'               # method 1
+    sed -n '1!G;h;$p'             # method 2
+
+    # reverse each character on the line (emulates "rev")
+    sed '/\n/!G;s/\(.\)\(.*\n\)/&\2\1/;//D;s/.//'
+#+END_SRC
+
+** join pairs of lines side-by-side (like "paste")
+#+BEGIN_SRC sh
+    sed '$!N;s/\n/ /'
+
+    # if a line ends with a backslash, append the next line to it
+    sed -e :a -e '/\\$/N; s/\\\n//; ta'
+
+    # add commas to numeric strings, changing "1234567" to "1,234,567"
+    gsed ':a;s/\B[0-9]\{3\}\>/,&/;ta'                     # GNU sed
+    sed -e :a -e 's/\(.*[0-9]\)\([0-9]\{3\}\)/\1,\2/;ta'  # other seds
+
+    # add commas to numbers with decimal points and minus signs (GNU sed)
+    gsed ':a;s/\(^\|[^0-9.]\)\([0-9]\+\)\([0-9]\{3\}\)/\1\2,\3/g;ta'
+#+END_SRC
+
+** remove leading whitespace and tabs
+#+BEGIN_SRC sh
+    sed -e 's/^[ \t]*//'
+#+END_SRC
+
+** remove trailing whitespace and tabs
+#+BEGIN_SRC sh
+    sed 's/[ \t]*$//'
+#+END_SRC
+
+** remove leading and trailing whitespace and tabs
+#+BEGIN_SRC sh
+    sed 's/^[ \t]*//;s/[ \t]*$//'
+#+END_SRC
+
+** edit inplace
+#+begin_src sh
+    # file.bak is the backup; file will be edited
+    sed -i .bak "/<pattern>/d" file
+#+end_src
+
+* tail
+
+** reverse
+#+BEGIN_SRC sh
+    tail -r
+#+END_SRC
+
+** skip first line
+#+BEGIN_SRC sh
+    tail +2
+#+END_SRC
+
+* wc
+
+** count lines in file
+#+BEGIN_SRC sh
+    wc -l < file|bc
+#+END_SRC
+
+** count occurrences
+#+BEGIN_SRC sh
+    grep -o "needle" file | wc -l
+#+END_SRC
+
+* imagemagick
+
+** convert
+*** filetype
+#+begin_src sh
+convert image.jpg newimage.png
+#+end_src
+
+*** layered file
+#+begin_src sh
+convert -flatten image.psd newimage.jpg
+#+end_src
+
+** crop
+#+begin_src sh
+#                       size xy offset xy
+convert image.png -crop 980x880+950+630 newimage.png
+#+end_src
+
+** diff
+#+begin_src sh
+compare -compose src file-a.jpg file-b.jpg difference.png
+#+end_src
+
+* docker
+
+** cleanup
+
+*** kill all running containers
+#+BEGIN_SRC sh
+    docker kill $(docker ps -q)
+#+END_SRC
+
+*** delete all stopped containers (including data-only containers)
+#+BEGIN_SRC sh
+    docker rm $(docker ps -a -q)
+#+END_SRC
+
+*** delete all 'untagged/dangling' (<none>) images
+#+BEGIN_SRC sh
+    docker rmi $(docker images -q -f dangling=true)
+#+END_SRC
+
+*** delete ALL images
+#+BEGIN_SRC sh
+    docker rmi $(docker images -q)
+#+END_SRC
+
+* wget
+
+** download directory
+#+begin_src sh
+# avoid downloading the index.html files
+    wget -r --no-parent --reject "index.html*" http://example.com/dir
+#+end_src
+
+* tar
+
+** compress directory
+#+begin_src sh
+    tar -zcvf archive-name.tar.gz directory-name
+#+end_src
+
+* pip
+
+** upgrade all packages
+#+begin_src sh
+    pip freeze --local | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U
+#+end_src
+
+* pbpaste
+** paste plain text
+#+begin_src sh
+    pbpaste | textutil -convert txt -stdin -stdout -encoding 30 | pbcopy
+#+end_src
+
+* ranger
+| Edit the current file in $EDITOR ("nano" by default) | E       |
+| Open a shell in the current directory                | S       |
+| Select                                               | <Space> |
+
+* ffmpeg
+
+** cut video
+params ss, t:
+Seek to given time position in seconds. “hh:mm:ss[.xxx]” syntax is also supported.
+#+BEGIN_SRC sh
+    ffmpeg -ss [start_seconds] -t [duration_seconds] -i [input_file] [outputfile]
+#+END_SRC
+
+** merge videos
+#+BEGIN_SRC sh
+    ffmpeg -f concat -safe 0 -i mylist.txt -c copy output.mp4
+    # where mylist.txt is in the form:
+    # # this is a comment
+    # file '/path/to/file1'
+    # file '/path/to/file2'
+    # file '/path/to/file3'
+#+END_SRC

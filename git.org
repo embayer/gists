@@ -1,0 +1,200 @@
+#+TITLE: git
+
+* undo
+
+** undo last commit
+#+BEGIN_SRC sh
+    git reset HEAD~
+
+    # If you don't want the changes and blow everything away:
+    git reset --hard HEAD~
+#+END_SRC
+
+** undo added file
+#+BEGIN_SRC sh
+    git checkout file
+#+END_SRC
+
+** moving to a new branch
+
+move commits to a new branch
+
+#+begin_src sh
+    # Note: Any changes not committed will be lost.
+    git branch newbranch      # Create a new branch, saving the desired commits
+    git reset --hard HEAD~3   # Move master back by 3 commits (GONE from master)
+    git checkout newbranch    # Go to the new branch that still has the desired commits
+#+end_src
+
+But do make sure how many commits to go back. Alternatively, you can instead of HEAD~3, simply provide the hash of the commit (or the reference like origin/master) you want to "revert back to" on the master (/current) branch, e.g:
+
+#+begin_src sh
+    git reset --hard a1b2c3d4
+#+end_src
+
+*1 You will only be "losing" commits from the master branch, but don't worry, you'll have those commits in newbranch!
+
+** moving to an existing branch
+
+WARNING The method above works because you are creating a new branch with the first command: git branch newbranch. If you want to use an existing branch you need to merge your changes into the existing branch before executing git reset --hard HEAD~3. If you don't merge your changes first, they will be lost. So, if you are working with an existing branch it will look like this:
+
+#+begin_src sh
+    git checkout existingbranch
+    git merge master
+    git checkout master
+    git reset --hard HEAD~3 # Go back 3 commits. You *will* lose uncommitted work.
+    git checkout existingbranch
+#+end_src
+
+* general
+
+** reference the last branch
+#+begin_src sh
+    git checkout -
+#+end_src
+
+** remove all deleted files
+#+BEGIN_SRC sh
+    git rm $(git ls-files --deleted)
+#+END_SRC
+
+** add changes to the last commit
+#+BEGIN_SRC sh
+    git commit --amend
+#+END_SRC
+
+** add partial
+#+BEGIN_SRC sh
+    git add --partial
+    # git add -p
+    git gui
+#+END_SRC
+
+* ancestry references
+** ref~
+Shorthand for ref~1 and means the commit's first parent. ref~2 means the commit's first parent's first parent. ref~3 means the commit's first parent's first parent's first parent. And so on.
+
+** ref^
+Shorthand for ref^1 and means the commit's first parent. But where the two differ is that ref^2 means the commit's second parent (remember, commits can have two parents when they are a merge).
+
+** combined
+The ^ and ~ operators can be combined.
+
+** example
+#+begin_src
+HEAD                -> *     5. commit on master
+HEAD~1 or HEAD^1    -> *     Merge branch 'my_branch'
+                       |\
+HEAD~1^2            -> | *   1. commit on branch
+HEAD~2 or HEAD~1^1  -> * /   4. commit on master
+HEAD~3 or HEAD~2^1  -> *     3. commit on master
+etc...                 *     2. commit on master
+                       *     1. commit on master
+#+end_src
+
+
+
+** grep in git history
+#+BEGIN_SRC sh
+    git grep <regexp> $(git rev-list --all)
+    # or
+    git rev-list --all | xargs git grep expression
+#+END_SRC
+
+** force overwrite pull
+#+BEGIN_SRC sh
+    git fetch --all
+    git reset --hard origin/master
+#+END_SRC
+
+** delete a tag
+#+BEGIN_SRC sh
+    git tag -d <tagname>
+    git push origin :refs/tags/<tagname>
+#+END_SRC
+
+** delete a branch
+#+BEGIN_SRC sh
+    git push origin --delete <branchName>
+#+END_SRC
+
+** show merge status of a branch
+#+BEGIN_SRC sh
+    git branch --merged
+    git branch --no-merged
+#+END_SRC
+
+** show the entire history of the file (including history beyond renames and with diffs for each change).
+#+BEGIN_SRC sh
+    git log --follow -p -- filename
+#+END_SRC
+
+** show logs of today in a compact view
+#+BEGIN_SRC sh
+    git log --since="yesterday" --pretty="oneline"
+#+END_SRC
+
+** stash (useful too, when working on the wrong branch)
+#+BEGIN_SRC sh
+    git stash
+    git stash apply
+#+END_SRC
+
+** show staged diffs
+#+BEGIN_SRC sh
+    git diff --cached
+#+END_SRC
+
+** show diffs between two commits
+#+BEGIN_SRC sh
+    git diff <commit-id>..<commit-id>
+    git diff <tag-name || branch-name> <file>
+#+END_SRC
+
+** export
+#+BEGIN_SRC sh
+    git archive <branch-name> --format=zip --output=<file>
+#+END_SRC
+
+** push local branch
+#+BEGIN_SRC sh
+    git push -u origin feature_branch_name
+#+END_SRC
+
+** show commits in a time interval
+#+BEGIN_SRC sh
+    git log --after="2015-11-13 00:00" --before="2015-11-16 23:59"
+#+END_SRC
+
+* git flow
+
+** create a feature branch
+#+BEGIN_SRC sh
+    git checkout -b myfeature develop
+#+END_SRC
+
+** finishing a feature branch
+#+BEGIN_SRC sh
+    git checkout develop
+    git merge --no-ff myfeature
+    git branch -d myfeature
+    git push origin develop
+#+END_SRC
+
+** creating a release branch
+#+BEGIN_SRC sh
+    git checkout -b release-1.2 develop
+    git commit -a -m "Bumped version number to 1.2"
+#+END_SRC
+
+** finishing a release branch
+#+BEGIN_SRC sh
+    git checkout master
+    git merge --no-ff release-1.2
+    git tag -a 1.2
+
+    git checkout develop
+    git merge --no-ff release-1.2
+
+    git branch -d release-1.2
+#+END_SRC

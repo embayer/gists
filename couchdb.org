@@ -1,0 +1,46 @@
+#+TITLE: couchdb
+
+* list functions
+
+** HTML
+*** document
+#+begin_src js
+{
+    "_id": "_design/kw08",
+    "language": "javascript",
+    "views": {
+        "all": {
+            "map": "
+                function(doc) {
+                    if (doc.keywords === 'foo') {
+                        emit(doc.asin, doc);
+                    }
+                }"
+        }
+    },
+    "lists": {
+        "summary": "
+             function(head, req) {
+                 var row;
+                 start({
+                     'headers': {
+                     'Content-Type': 'text/html'
+                     }
+                 });
+                 while(row = getRow()) {
+                     send('<h2>'+row.value.asin+'</h2>');
+                 }
+             }"
+   }
+}
+#+end_src
+
+*** PUT
+#+begin_src sh
+    curl -X PUT http://localhost:5984/dbname/_design/ -d @documentname.json
+#+end_src
+
+*** GET
+#+begin_src sh
+    curl http://localhost:5984/products/_design/kw/_list/summary/all
+#+end_src

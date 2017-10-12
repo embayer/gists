@@ -1,0 +1,364 @@
+#+TITLE: emacs
+
+* terminology
+
+** copy
+
+| Common Name | Common Key | Emacs Name     | Emacs Key |
+|-------------+------------+----------------+-----------|
+| Cut         | C-x        | Kill           | C-w       |
+| Copy        | C-c        | Kill-ring-save | M-w       |
+| Paste       | C-v        | Yank           | C-y       |
+| —           | —          | Yank next      | M-y       |
+
+** "windows"
+
+| Buffers | hold the data displayed in windows   |
+| Frames  | Windows                              |
+| Windows | divisions of frames (Panes / Splits) |
+
+* general
+
+** help
+
+| <Ctrl-h> a            | get help for a command (word list or regexp) |
+| <Ctrl-h> k            | describe key                                 |
+| <Meta-x> info <Enter> | read the documentation                       |
+
+** save
+
+| <Ctrl-x> <Ctrl-s> | save the current buffer                           |
+| <Ctrl-x> <s>      | save all buffers                                  |
+| <Ctrl-x> <Ctrl-w> | save the current buffer with a specified filename |
+
+** open
+
+| <Ctrl-x> <Ctrl-f>           | open/create file              |
+| <Meta-x> revert-buffer      | reload file in current buffer |
+| <Meta-x> find-file-at-point | open a uri                    |
+
+** close
+
+| <Ctrl-x> <Ctrl-c> | quit        |
+| <Ctrl-x> <k>      | kill buffer |
+
+** copy paste
+
+| <Ctrl-w> | copy  |
+| <Ctrl-y> | paste |
+| <Meta-w> | cut   |
+
+** search and replace
+
+| <Ctrl-s>                            | incremental search |
+| <Ctrl-s>                            | next candidat      |
+| <Meta-x> delete-trailing-whitespace | guess what         |
+
+** buffer
+
+| <Ctrl-x> <1> | delete all other windows |
+| <Ctrl-x> <o> | switch buffer            |
+
+** source
+
+| <Ctrl-x> <Ctrl-e> | eval sexp |
+
+** lines
+
+| visual-line-mode | toggle line wraps |
+
+** commands
+
+| <Ctrl-x> <z> | repeat last command | repeat |
+
+** recenter
+
+| <Ctrl-l> | Scroll the selected window so the current line is the center-most text line; on subsequent consecutive invocations, make the current line the top line, the bottom line, and so on in cyclic order. | recenter-top-bottom |
+
+* packages
+
+| <Meta-x> list-packages <Enter> | list available packages |
+
+* re-builder
+
+| <Meta-x> re-builder | start regular expression builder |
+| <Ctrl-c> <Ctrl-q>   | exit regular expression builder  |
+
+
+* evil-mode
+
+| <Meta-p> | search history up |
+| <Meta-n> | search history down |
+| / <ctrl-y> | paste text to search for |
+
+* org-mode
+
+** help
+
+[[cheatsheet.pdf][http://orgmode.org/orgcard.pdf]]
+
+| <Meta-x> org-info <Enter> | read the documentation |
+
+** visibility
+
+*** cycling
+
+| <Tab>       | rotate current subtree between states |
+| <Shift-Tab> | rotate entire buffer between states   |
+
+*** initial document visibility
+
+**** #+STARTUP:
+
+| overview       | top-level headlines only  |
+| content        | all headlines             |
+| showall        | no folding of any entries |
+| showeverything | show even drawer contents |
+
+*** headline visibility
+
+**** #+VISIBILITY:
+
+| folded   | only headline   |
+| children | child headlines |
+| content  |                 |
+| all      | everything      |
+
+#+BEGIN_SRC org
+    * headline
+        :PROPERTIES:
+        :VISIBILITY: folded
+        :END:
+#+END_SRC
+
+** properties
+
+| org-set-property | set property for cursor position context |
+
+** motion
+
+| <Ctrl-c> <Ctrl-n/p> | next/previous heading                               |
+| <Meta-up>           | scroll to next page                                 |
+| <Meta-down>         | scroll to previous page                             |
+| <Ctrl-l>            | focus the text around the coursor (can be repeated) |
+
+** structure editing
+
+| <Meta-Shift-Up/Down> | move subtree/list item up/down                |
+| <Meta-Enter>         | insert new heading/item at current level      |
+| <Ctrl-Enter>         | insert new heading after subtree              |
+| <Meta-Shift-Enter>   | insert new TODO entry (TODO \vert\vert - [ ]) |
+
+** markup
+
+| *bold*             |
+| /italic/           |
+| _underlined_       |
+| =verbatim=         |
+| ~code~             |
+| ‘+strike-through+’ |
+
+** tables
+
+| \vert--<Tab>          | insert seperating row                        |
+| <Ctrl-c> <Ctrl-c>     | re-align the table without moving the cursor |
+| <Tab>                 | re-align the table, move to next field       |
+| <Shift-Tab>           | move to previous field                       |
+| <Enter>               | re-align the table, move to next row         |
+| <Meta-Shift-Up/Down>  | move row up/down                             |
+| <Meta-Left/Right>     | move the current column left                 |
+| <Meta-Shift-Left>     | kill the current column                      |
+| <Meta-Shift-Right>    | insert new column to left of cursor position |
+| <C-u> <C-c> <\vert>   | convert selected region to table             |
+| C-c \vert             | create or convert from region                |
+| org-table-export      | export/convert table                         |
+| \ vert (together)     | escape pipe (\vert)                          |
+| org-table-blank-field | clear cell at point                          |
+
+
+*** formulas
+
+| <Ctrl-c> ?          | reference the current cell               |
+| <Ctrl-c> }          | turn on the reference visualization grid |
+| <Ctrl-u> <Ctrl-c> * | re-evaluate all formulas                 |
+
+| :=vsum(@2..@9)  | sum of row 2 -9      |
+| :=vmean($1..$9) | mean of column 1 - 9 |
+
+** links
+
+| <Ctrl-c> <Ctrl-l>          | insert a link (TAB completes stored links) / edit link at point |
+| <Ctrl-u> <Ctrl-c> <Ctrl-l> | insert file link with file name completion                      |
+| <Ctrl-c> <Ctrl-o>          | open file links in emacs                                        |
+| <Ctrl-c> <Ctrl-l>          | edit link under the cursor                                      |
+
+*** format
+
+    [[link][description]]       or alternatively           [[link]]
+
+#+BEGIN_SRC
+    [[link][description]]
+    # or alternatively
+    [[link]]
+    # image
+    [[image]]
+#+END_SRC
+
+** "TODO" Items
+
+| <Ctrl-c> <Ctrl-t>  | rotate the state of the current item          |
+| <Shift-Up/Down>    | raise/lower priority                          |
+| <Ctrl-c> <Ctrl-c>  | toggle checkbox at point (- [ ] subtask)      |
+| <Meta-Shift-Enter> | insert new TODO entry (TODO \vert\vert - [ ]) |
+
+*** repeated tasks
+
+#+begin_src org
+     ** TODO Pay the rent
+        DEADLINE: <2005-10-01 Sat +1m>
+#+end_src
+
+where y/w/m/d/h can be used
+
+** timestamps
+
+| <Ctrl-c> .         | prompt for a timestamp                                                    |
+| <Ctrl-c> !         | prompt for an inactive timestamp                                          |
+| <Ctrl-c> <Ctrl-d>  | insert DEADLINE timestamp                                                 |
+| <Ctrl-c> <Ctrl-s>  | insert SCHEDULED timestamp                                                |
+| <Shift-Right/Left> | change timestamp at cursor ±1 day                                         |
+| <Shift-Up/Down>    | change year/month/day at cursor by ±1                                     |
+| <Ctrl-c> >         | access the calendar for the current date                                  |
+| <Ctrl-c> <         | insert timestamp matching date in calendar access agenda for current date |
+
+** agenda
+
+| <Ctrl-c> <a> <a> | agenda view |
+| <l>              | log view    |
+| <q>              | quit        |
+
+** code blocks
+
+| <Ctrl-c> <Ctrl-c> | execute code block under cursor |
+| <s TAB            | insert code block               |
+
+*** format
+*+BEGIN_SRC org
+    *+BEGIN_SRC org
+        echo "This file takes up `du -h emacs.md | sed 's/\([0-9k]*\)[ ]*emacs.md/\1/'`"
+    *+END_SRC
+*+END_SRC
+
+*** supported languages
+
+| Language      | Identifier        | Language      | Identifier    |
+|---------------|-------------------|---------------|---------------|
+| Asymptote     | asymptote         | Awk           | awk           |
+| C             | C                 | C++           | C++           |
+| Clojure       | clojure           | CSS           | css           |
+| D             | d                 | ditaa         | ditaa         |
+| Graphviz      | dot               | Emacs Calc    | calc          |
+| Emacs Lisp    | emacs-lisp        | Fortran       | fortran       |
+| gnuplot       | gnuplot           | Haskell       | haskell       |
+| Java          | java              | Javascript    | js            |
+| LaTeX         | latex             | Ledger        | ledger        |
+| Lisp          | lisp              | Lilypond      | lilypond      |
+| MATLAB        | matlab            | Mscgen        | mscgen        |
+| Objective Caml| ocaml             | Octave        | octave        |
+| Org mode      | org               | Oz            | oz            |
+| Perl          | perl              | Plantuml      | plantuml      |
+| Processing.js | processing        | Python        | python        |
+| R             | R                 | Ruby          | ruby          |
+| Sass          | sass              | Scheme        | scheme        |
+| GNU Screen    | screen            | Sed           | sed           |
+| shell         | sh                | SQL           | sql           |
+| SQLite        | sqlite            |               |               |
+
+** tags
+
+*** heading tags
+
+| <Ctrl-c> <Ctrl-q>          | set tags for current heading                |
+| <Ctrl-u> <Ctrl-c> <Ctrl-q> | realign tags in all headings                |
+| <Ctrl-c> <\>               | create sparse tree with matching            |
+| <Ctrl-c> <Ctrl-o>          | tags globally (agenda) match tags at cursor |
+| org-change-tag-in-region   | set tags for selected headings              |
+
+** priority
+
+| <Shift-Up/Down> | set prio for header |
+
+** sort
+
+Sorting methods: Alphabetically, numerically, by time (first timestamp with active preferred, creation time, scheduled time, deadline time), by priority, by TODO keyword or by the value of a property.
+
+| Ctrl-c ^ | org-sort | sorts the selected region |
+
+** export
+
+| <Ctrl-c> <Ctrl-e> | export/publish dispatcher |
+
+** time tracking
+
+| C-c C-x C-i | (org-clock-in)      | Start the clock on the current item |
+| C-c C-x C-o | (org-clock-out)     | Stop the clock                      |
+| C-c C-x C-x | (org-clock-in-last) | Reclock the last clocked task       |
+| C-c C-x C-r | (org-clock-report)  | Show a report table                 |
+| C-c C-x C-d | org-clock-display   | Summarize times inline              |
+
+* workgroups2
+
+| <Ctrl-c> z   | <prefix>            |
+| <prefix> c   | create workgroup    |
+| <prefix> A   | rename workgroup    |
+| <prefix> k   | kill workgroup      |
+| <prefix> v   | switch to workgroup |
+| <prefix> C-s | save session        |
+| <prefix> C-f | load session        |
+
+* helm
+
+** usage
+You can mark candidates with C-SPC; this is useful when you need to perform an action on many candidates of your choice (kill buffers for example). M-a to select all.
+You can insert marked candidates into the current buffer with C-c C-i. This is useful when you have narrowed to a list of candidates, i.e. files, and then you want to save such candidates.
+If you find the current horizontal Helm window is small, you can always switch it to a vertical window with C-t. Running C-t again returns the Helm window back to horizontal and so on.
+
+From within a helm-find-files session, you can invoke helm-ff-run-grep with C-s to search a file/directory on highlighted entry in the Helm buffer. With prefix argument C-u, recursively greps a selected directory.
+
+You can also save the result into a Grep buffer using the action Save results in Grep buffer. Note that this Grep buffer is created by Helm, not the default Emacs grep buffer. It has minimal key bindings. In *hgrep* buffer, press C-h m to view all key bindings.
+
+
+** functions
+
+| helm-for-files                  |                         |
+| helm-complex-command-history    |                         |
+| helm-projectile-grep            |                         |
+| helm-info                       |                         |
+| helm-find                       |                         |
+| helm-info                       |                         |
+| helm-regexp                     |                         |
+| helm-top                        |                         |
+| helm-surfraw                    |                         |
+| helm-color                      |                         |
+| helm-eval-expression-with-eldoc |                         |
+| helm-calcul-expression          |                         |
+| helm-show-kill-ring             |                         |
+| helm-find-files                 | like find-file-at-point |
+
+
+* magit
+
+| <Meta-x> magit-status | show magit status buffer |
+
+| s       | Stage current hunk                    |
+| u       | Unstage current hunk                  |
+| S       | Stage all hunks                       |
+| U       | Unstage all hunks                     |
+| k       | Discard uncommitted changes           |
+| c       | Prepare for commit                    |
+| C-c C-c | Execute commit triggers commit action |
+| C-c C-a | Make the next commit an amend         |
+
+* smartparens
+
+| sp-splice-sexp | remove surrounding |

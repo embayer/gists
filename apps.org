@@ -1,0 +1,54 @@
+#+TITLE: apps
+
+* slack
+
+** shortcuts
+
+<cmd> / <ctrl> are equivalent
+
+| shortcut      | action         |
+|---------------+----------------|
+| <cmd-1>       | switch team    |
+| <cmd-k>       | quick switcher |
+| <cmd-shift-k> | direct message |
+| <cmd-u>       | upload a file  |
+
+** slash commands
+
+| Command                                  | Action                                                                                    |
+|------------------------------------------+-------------------------------------------------------------------------------------------|
+| /shrug [your message]                    | Appends ¯\_(ツ)_/¯ to your message                                                        |
+| /keys                                    | Open the keyboard shortcuts dialog                                                        |
+| /search [your text]                      | Search Slack messages and files                                                           |
+| /me [your text]                          | Display action text, e.g. "/me does a dance" will display "does a dance"                  |
+| /msg user [your message]                 | Send a private message to another user                                                    |
+| /dm user [your message]                  | Send a private message to another user                                                    |
+| /away                                    | Toggle your “away” status                                                                 |
+| /mute                                    | Mute a channel, or unmute a channel that is muted                                         |
+
+more
+
+| Command                                  | Action                                                                                    |
+|------------------------------------------+-------------------------------------------------------------------------------------------|
+| /archive                                 | Archive the current channel                                                               |
+| /close                                   | Close a channel or direct message                                                         |
+| /collapse                                | Collapse all inline images and video in the current channel (opposite of /expand)         |
+| /expand                                  | Expand all inline images and video in the current channel (opposite of /collapse)         |
+| /feed help [or subscribe, list, remove…] | Manage RSS subscriptions                                                                  |
+| /feedback [your feedback]                | Send feedback to Slack                                                                    |
+| /invite @user [channel]                  | Invite another member to a channel                                                        |
+| /join [channel]                          | Open a channel                                                                            |
+| /kick @user                              | or                                                                                        |
+| /remove @user                            | Removes user from the current channel. This action may be restricted to owners or admins. |
+| /leave                                   | Close a channel or direct message                                                         |
+| /open [channel]                          | Open a channel                                                                            |
+| /part                                    | Close a channel or direct message                                                         |
+| /prefs                                   | Open the preferences dialog                                                               |
+| /remind me in [time] to [message]        | Set a Slackbot reminder that will send you a direct message at the time you specify.      |
+| /remind me to [message] at [time]        | To schedule a reminder for a specific date, use the format MM/DD/YYYY or DD.MM.YYYY.      |
+| /remind help                             | Learn more about how to set reminders.                                                    |
+| /remind list                             | Get a list of the reminders you've set.                                                   |
+| /rename [new name]                       | Rename a channel (admin only)                                                             |
+| /shortcuts                               | Open the keyboard shortcuts dialog                                                        |
+| /topic [text]                            | Set the channel topic                                                                     |
+| /who                                     | List users in the current channel                                                         |

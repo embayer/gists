@@ -1,0 +1,417 @@
+#+TITLE: zsh
+
+* misc
+
+** shebang
+#+BEGIN_SRC sh
+#!/usr/bin/env bash
+#+END_SRC
+
+** dryrun
+#+BEGIN_SRC sh
+sh -e
+#+END_SRC
+
+** here document
+#+BEGIN_SRC sh
+cat <<LimitString
+foo
+bar
+baz
+LimitString
+#+END_SRC
+
+** write on top of a file
+#+begin_src sh
+    echo -e "first line\n$(cat file.txt)" > file.txt
+#+end_src
+
+** jump to a directory, execute a command and jump back to current dir
+#+BEGIN_SRC sh
+(cd /tmp && ls)
+#+END_SRC
+
+** avoid cat abuse
+#+BEGIN_SRC sh
+~~cat filename | sort~~
+sort < filename
+#+END_SRC
+
+** create a directory and cd into it
+#+BEGIN_SRC sh
+mkdir /home/foo/doc/bar && cd $_
+#+END_SRC
+
+** prefix all files in the current directory
+#+BEGIN_SRC sh
+# zsh
+for file in *; do
+    mv $file prefix_${file%%}
+done
+# bash
+for file in *; do
+    mv $file prefix_"${file%.*}"
+done
+#+END_SRC
+
+** check if an item is in an array
+#+BEGIN_SRC sh
+item_in () {
+    local item
+    for item in "${@:2}"; do [[ "$item" == "$1" ]] && return 0; done
+    return 1
+}
+
+# $ array=("something to search for" "a string" "test2000")
+# $ item_in "a string" "${array[@]}"
+# $ echo $?
+# 0
+# $ containsElement "foo" "${array[@]}"
+# $ echo $?
+# 1
+#+END_SRC
+
+** replace in filename
+replace - by _ in pwd
+#+BEGIN_SRC sh
+    for file in *; do mv $file ${file/-/_} ; done
+    
+    # or with tr
+    ls | while read -r file
+    do
+        mv -v "$file" `echo $file | tr '-' '_'`
+    done
+    
+    # or with rename
+    rename '-' '_' *
+#+END_SRC
+
+** create a string with $n*$char
+#+BEGIN_SRC sh
+    n=42
+    char="-"
+    spacer=$(head -c $n < /dev/zero | tr '\0' "$char")
+#+END_SRC
+
+* redirection
+
+| cmd                   | function                              |
+|-----------------------+---------------------------------------|
+| prog > file           | send stdout to file                   |
+| prog 2> file          | send stderr to file                   |
+| prog > file 2>&1      | send stdout and stderr to file        |
+| prog < file           | take stdin from file                  |
+| prog >> file          | send stdout to end of file            |
+| prog 2>> file         | send stderr to end of file            |
+| prog >> file 2>&1     | send stdout and stderr to end fo file |
+| prog <<c              | read stdin from keyboard until c      |
+| prog \vert prog2      | pipe stdout to prog2                  |
+| prog 2>&1 \vert prog2 | pipe stdout and stderr to prog2       |
+| prog > /dev/null 2>&1 | redirect stdout, stderr               |
+| prog 2> /dev/nul      | redirect stderr                       |
+| prog &> /dev/null     | redirect stdout                       |
+
+* job control
+
+** suspend a job running in foreground
+| <ctrl-z> |
+
+** start a job in background
+#+BEGIN_SRC sh
+   gcc program.c -o program &
+#+END_SRC
+
+** list background jobs
+#+BEGIN_SRC sh
+    jobs
+#+END_SRC
+
+** bring the background job with the job id 1 to foreground
+#+BEGIN_SRC sh
+    fg %1
+#+END_SRC
+
+** terminate the background job with the job id 1
+#+BEGIN_SRC sh
+    kill %1
+#+END_SRC
+
+* keybindings
+
+| key                     | description                                                                                          |
+|-------------------------+------------------------------------------------------------------------------------------------------|
+| <escape-.>              | last param of the last command (repeat)                                                              |
+| <ctrl-u> [...] <ctrl-y> | type partial command, kill this command, check something you forgot, yank the command, resume typing |
+| <alt-.>                 | insert previous command argument                                                                     |
+| <alt-a>                 | multiselect in menu complete                                                                         |
+| <alt-arrow-left>        | move a word backward                                                                                 |
+| <alt-arrow-right>       | move a word forward                                                                                  |
+| <cmd-del>               | delete the word left of the cursor                                                                   |
+| <cmd-arrow-left>        | move to the beginning of the line                                                                    |
+| <cmd-arrow-right>       | move to the end of the line                                                                          |
+| <cmd-arrow-down>        | delete the whole line                                                                                |
+| <ctrl-x>                | delete the char under the cursor                                                                     |
+| <ctrl-w>                | delete the word under the cursor                                                                     |
+| <alt-arrow-up>          | cd ..                                                                                                |
+| <ctr-l>                 | ls -laH                                                                                              |
+| <arrow-up>              | history substring search backward                                                                    |
+| <arrow-down>            | history substring search forward                                                                     |
+| <ctrl-z>                | suspend job to background                                                                            |
+
+* globbing
+
+** list all javascript files under pwd
+#+BEGIN_SRC sh
+    ls **/**js
+#+END_SRC
+
+** list text files that end in a number from 1 to 10
+#+BEGIN_SRC sh
+    ls -l zsh_demo/**/*<1-10>.txt
+#+END_SRC
+
+** list text files that start with the letter a
+#+BEGIN_SRC sh
+    ls -l zsh_demo/**/[a]*.txt
+#+END_SRC
+
+** list text files that start with either ab or bc
+#+BEGIN_SRC sh
+    ls -l zsh_demo/**/(ab|bc)*.txt
+#+END_SRC
+
+** list text files that don't start with a lower or uppercase c
+#+BEGIN_SRC sh
+    ls -l zsh_demo/**/[^cC]*.txt
+#+END_SRC
+
+** show only directories
+#+BEGIN_SRC sh
+    print -l zsh_demo/**/*(/)
+#+END_SRC
+
+** show only regular files
+#+BEGIN_SRC sh
+    print -l zsh_demo/**/*(.)
+#+END_SRC
+
+** show empty files
+#+BEGIN_SRC sh
+    ls -l zsh_demo/**/*(L0)
+#+END_SRC
+
+** show files greater than 3 KB
+#+BEGIN_SRC sh
+    ls -l zsh_demo/**/*(Lk+3)
+#+END_SRC
+
+** show files modified in the last hour
+#+BEGIN_SRC sh
+    print -l zsh_demo/**/*(mh-1)
+#+END_SRC
+
+** sort files from most to least recently modified and show the last 3
+#+BEGIN_SRC sh
+    ls -l zsh_demo/**/*(om[1,3])
+#+END_SRC
+
+* expansion
+
+** parameter expansion
+#+BEGIN_SRC sh
+    git diff ./file_1.py
+    git add !:2<TAB>            * expands to git add ./file_1.py
+
+    !!                          * last command
+    !$                          * last parameter of the last command
+    !*                          * all parameters
+#+END_SRC
+
+* parameter processing
+
+***** one by one
+#+BEGIN_SRC sh
+    *!/bin/bash
+
+    for i in "$@"
+    do
+        case $i in
+            -e=*|--extension=*)
+                EXTENSION="${i**=}"
+                shift * past argument=value
+                ;;
+            -s=*|--searchpath=*)
+                SEARCHPATH="${i**=}"
+                shift * past argument=value
+                ;;
+            -l=*|--lib=*)
+                LIBPATH="${i**=}"
+                shift * past argument=value
+                ;;
+            --default)
+                DEFAULT=YES
+                shift * past argument with no value
+                ;;
+            *)
+            * unknown option
+            ;;
+        esac
+    done
+#+END_SRC
+
+***** paired
+#+BEGIN_SRC sh
+    #!/bin/bash
+    # Use -gt 1 to consume two arguments per pass in the loop (e.g. each
+    # argument has a corresponding value to go with it).
+    # Use -gt 0 to consume one or more arguments per pass in the loop (e.g.
+    # some arguments don't have a corresponding value to go with it such
+    # as in the --default example).
+    # note: if this is set to -gt 0 the /etc/hosts part is not recognized ( may be a bug )
+    while [[ $* -gt 1 ]]
+    do
+        key="$1"
+
+        case $key in
+            -e|--extension)
+                EXTENSION="$2"
+                shift * past argument
+                ;;
+            -s|--searchpath)
+                SEARCHPATH="$2"
+                shift * past argument
+                ;;
+            -l|--lib)
+                LIBPATH="$2"
+                shift * past argument
+                ;;
+            --default)
+                DEFAULT=YES
+                ;;
+            *)
+                * unknown option
+            ;;
+        esac
+    shift * past argument or value
+done
+#+END_SRC
+
+***** reverse
+#+BEGIN_SRC sh
+files=(/var/logs/foo*.log)
+   for ((i=${*files[@]}-1; i>=0; i--)); do
+     bar "${files[$i]}"
+   done
+#+END_SRC
+
+** forloop
+#+BEGIN_SRC sh
+    for i in `seq 1 7`;
+    do
+        echo $i
+    done 
+    
+    # reverse
+    for i in `seq 7 -1 1`;
+    do
+        echo $i
+    done 
+#+END_SRC
+
+** read file line by line
+#+BEGIN_SRC sh
+while read line; do
+  echo $line
+done <file.txt
+#+END_SRC
+
+** extract filename and extension
+#+BEGIN_SRC sh
+    pathname=$(dirname "$fullfile")
+    filename=$(basename "$fullfile")
+    extension="${filename##*.}"
+    filename="${filename%.*}"
+#+END_SRC
+
+** recursion in subdirectories
+*** with xargs
+#+BEGIN_SRC sh
+    find /tmp -name '*.pdf' -or -name '*.doc' | xargs rm
+#+END_SRC
+
+*** with a loop
+#+BEGIN_SRC sh
+for f in $(find /tmp -name '*.pdf' -or -name '*.doc'); do
+    rm $f;
+done
+#+END_SRC
+
+this will fail if there are spaces in filenames. You can work around this by temporarily setting the IFS (internal field seperator) to the newline character.
+#+BEGIN_SRC sh
+    IFS=$'\n';for f in $(find /tmp -name '*.pdf' -or -name '*.doc'); do rm $f; done
+#+END_SRC
+
+If you have newlines in your filenames, then that won't work either. You're better off with an xargs based solution:
+(The escaped brackets are required here to have the -print0 apply to both or clauses.)
+#+BEGIN_SRC sh
+    find /tmp \( -name '*.pdf' -or -name '*.doc' \) -print0 | xargs -0 rm
+#+END_SRC
+
+find also has a -delete action, which would look like this:
+
+#+BEGIN_SRC sh
+    find /tmp \( -name '*.pdf' -or -name '*.doc' \) -delete
+#+END_SRC
+
+** user confiramtion
+#+BEGIN_SRC sh
+read -p "Are you sure? " -n 1 -r
+echo    # (optional) move to a new line
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    # do dangerous stuff
+fi
+#+END_SRC
+* OS X
+
+** use mac apps from the shell
+#+BEGIN_SRC sh
+    open -a /Applications/Whatever.app
+#+END_SRC
+
+** prevent spotlight from indexing external volume
+#+BEGIN_SRC sh
+    mdutil -i off /Volumes/VolumeName
+#+END_SRC
+
+** locatemd: to search for a file using Spotlight's metadata
+#+BEGIN_SRC sh
+    spotlight $file
+#+END_SRC
+
+** show the SpotLight comment for a file
+#+BEGIN_SRC sh
+    spotlight_comment $file
+#+END_SRC
+
+** oh my zsh
+
+** return the current Finder selection
+#+BEGIN_SRC sh
+    pfs
+#+END_SRC
+
+** cd to the current Finder directory
+#+BEGIN_SRC sh
+    cdf
+#+END_SRC
+
+** quick look a specified file
+#+BEGIN_SRC sh
+    quick-look $file
+#+END_SRC
+
+** eject all external volumes
+#+BEGIN_SRC sh
+    eject
+#+END_SRC

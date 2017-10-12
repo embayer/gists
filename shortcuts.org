@@ -1,0 +1,13 @@
+* Chrome
+
+| <Alt-Delete>      | delete next word                         |
+| <Alt-Backspace    | delete previous word                     |
+| <Cmd-Left/Right>  | beginning/end of line                    |
+| <Ctrl-Left/Right> | previous/next word                       |
+| <Ctrl-k>          | kill from cursor position to end of line |
+| <Ctrl-f>          | move forward                             |
+| <Ctrl-b>          | move backward                            |
+| <Ctrl-a>          | beginning of line                        |
+| <Ctrl-e>          | end of line                              |
+| <Ctrl-h>          | delete backward                          |
+| <Ctrl-d>          | delete forward                           |

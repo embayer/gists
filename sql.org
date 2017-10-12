@@ -1,0 +1,25 @@
+#+TITLE: SQL
+
+* find duplicated values
+#+BEGIN_SRC sql
+    SELECT
+        address_line1, address_line2, zip, city, country, COUNT(*)
+    FROM
+        location
+    GROUP BY
+        address_line1, address_line2, zip, city, country
+    HAVING
+        COUNT(*) > 1;
+#+END_SRC
+
+* show the average length of a column
+#+BEGIN_SRC sql
+    SELECT
+        AVG(LENGTH(column1))
+    FROM table1
+#+END_SRC
+
+* reset AUTO_INCREMENT
+#+BEGIN_SRC sql
+    ALTER TABLE tablename AUTO_INCREMENT = 1
+#+END_SRC

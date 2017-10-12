@@ -1,0 +1,13 @@
+#+TITLE: macOS
+
+* Finder
+
+| <Cmd><Shift>G | open directory path |
+
+* input
+
+| <Ctrl><Cmd><SPC> | open emoji keyboard |
+
+* Windowmanager
+
+| <Cmd><F3> | show desktop |
