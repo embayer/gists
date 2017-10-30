@@ -1,5 +1,11 @@
 #+TITLE: python
 
+* long imports
+#+BEGIN_SRC python
+from Tkinter import (Tk, Frame, Button, Entry, Canvas, Text,
+    LEFT, DISABLED, NORMAL, RIDGE, END) 
+#+END_SRC
+
 * __str__ & __repr__
 *__repr__* goal is to be unambiguous
 *__str__* goal is to be readable
@@ -180,3 +186,16 @@ Class that bundles some attributes without custom methods (like a struct).
     del wb['Sheet']
     wb.save(filename='excel.xlsx')
 #+end_src
+
+* Django
+
+** programmatically add Models with FileFields
+#+BEGIN_SRC python
+from myapp.models import *
+from django.core.files import File
+
+f = open('a_file.jpg', 'rb')
+df = File(f)
+mm = MyModel(file=df)
+mm.save()
+#+END_SRC

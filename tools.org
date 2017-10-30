@@ -77,6 +77,15 @@ ls *.{mp3,exe,mp4}
 
 * sed
 
+** Add a prefix string to beginning of each line
+#+BEGIN_SRC sh
+    sed -e 's/^/prefix/' file
+    # If you want to edit the file in-place
+    sed -i -e 's/^/prefix/' file
+    # If you want to create a new file
+    sed -e 's/^/prefix/' file > file.new
+#+END_SRC
+
 ** strip out urls from html
 #+BEGIN_SRC sh
     sed -n 's/.*href="\([^"]*\).*/\1/p' file
@@ -330,3 +339,21 @@ Seek to given time position in seconds. “hh:mm:ss[.xxx]” syntax is also supp
     # file '/path/to/file2'
     # file '/path/to/file3'
 #+END_SRC
+
+* say
+#+BEGIN_SRC sh
+    say -v Daniel "Tea time!"
+    # list available voices
+    say -v "?"
+    # repl
+    say
+    # interactive (karaoke)
+    say --interactive=/green spending each day the color of the leaves
+    # store output
+    say -o hi.m4a --data-format=alac Hello, World.
+    # list available file formats
+    say --file-format=?
+    # read from file
+    say -f some_file.txt
+#+END_SRC
+

@@ -3,6 +3,7 @@
 * Finder
 
 | <Cmd><Shift>G | open directory path |
+| <Cmd>1 - 2    | switch view         |
 
 * input
 
