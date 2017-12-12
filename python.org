@@ -1,9 +1,54 @@
 #+TITLE: python
 
+* padding
+
+** leftpadding
+#+BEGIN_SRC python
+'a string'.ljust(10, '-')
+# a string--
+
+# there is also str.rjust()
+#+END_SRC
+
+** zero padding
+#+BEGIN_SRC python
+str(7).zfill(3)
+# '007'
+#+END_SRC
+
+* get arguments form commandline
+#+BEGIN_SRC python
+from sys import exit, argv
+
+
+if __name__ == "__main__":
+    if len(argv) > 1:
+        print('you passed argument: "{}"'.format(str(argv[1])))
+        exit(0)
+    else:
+        print('argument required')
+        exit(1)
+#+END_SRC
+
+* execute inline from shell
+#+BEGIN_SRC sh
+python -c "print('hi')"
+#+END_SRC
+
+* bytes to string
+#+BEGIN_SRC python
+my_bytes.decode('utf-8')
+#+END_SRC
+
+* split string at \n
+#+BEGIN_SRC python
+my_str.splitlines()
+#+END_SRC
+
 * long imports
 #+BEGIN_SRC python
 from Tkinter import (Tk, Frame, Button, Entry, Canvas, Text,
-    LEFT, DISABLED, NORMAL, RIDGE, END) 
+    LEFT, DISABLED, NORMAL, RIDGE, END)
 #+END_SRC
 
 * __str__ & __repr__
@@ -27,7 +72,10 @@ fpath = '/path/to/file.txt'
 splitext(basename(self.fpath))[0]
 #+END_SRC
 
-* reserved keywords
+* reserved words
+
+** reserved keywords
+
 #+BEGIN_SRC python
     import keyword
     # test

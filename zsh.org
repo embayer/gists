@@ -86,6 +86,11 @@ replace - by _ in pwd
     rename '-' '_' *
 #+END_SRC
 
+** lowercase filenames
+#+BEGIN_SRC sh
+for i in *; do mv $i $(echo $i | tr "[A-Z]" "[a-z]"); done
+#+END_SRC
+
 ** create a string with $n*$char
 #+BEGIN_SRC sh
     n=42
@@ -108,7 +113,7 @@ replace - by _ in pwd
 | prog \vert prog2      | pipe stdout to prog2                  |
 | prog 2>&1 \vert prog2 | pipe stdout and stderr to prog2       |
 | prog > /dev/null 2>&1 | redirect stdout, stderr               |
-| prog 2> /dev/nul      | redirect stderr                       |
+| prog 2> /dev/null     | redirect stderr                       |
 | prog &> /dev/null     | redirect stdout                       |
 
 * job control
@@ -214,6 +219,10 @@ replace - by _ in pwd
 #+BEGIN_SRC sh
     ls -l zsh_demo/**/*(om[1,3])
 #+END_SRC
+
+0 = Varname
+${0%/*} removes everything including and after the last / in the filename
+${0##*/} removes everything before and including the last / in the filename
 
 * expansion
 
@@ -372,6 +381,13 @@ then
     # do dangerous stuff
 fi
 #+END_SRC
+
+** operate on directories
+#+BEGIN_SRC sh
+ls -d */
+rm -d */
+#+END_SRC
+
 * OS X
 
 ** use mac apps from the shell

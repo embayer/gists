@@ -80,6 +80,19 @@ n and m are positive integers (>0)
 | ~  | the previous substitute string	                  |
 | \u | next character made uppercase                      |
 
+** refer to the last search
+leave search pattern part empty
+#+BEGIN_SRC
+:%s//New String/g
+#+END_SRC
+*** TODO http://vim.wikia.com/wiki/Search_and_replace_the_word_under_the_cursor
+*** TODO http://vim.wikia.com/wiki/VimTip159
+
+** insert word under cursor
+#+BEGIN_SRC
+:<C-r><C-w>
+#+END_SRC
+
 ** split lines on pattern
 To operate on the entire file
 #+BEGIN_SRC
@@ -218,6 +231,13 @@ To operate only on the selected text
 | ``       | Return to the cursor position before the latest jump (undo the jump) (Two back ticks. This is above the Tab key on some keyboards.) |
 | '.       | Jump to the last-changed line.                                                                                                      |
 | 42G      | Jump to line 42 (same as 42gg :42<CR>                                                                                               |
+
+mx 
+Set mark x at the current cursor position.
+'x 
+Jump to the beginning of the line of mark x.
+`x 
+Jump to the cursor position of mark x.
 
 ** insert
 

@@ -1,5 +1,14 @@
 #+TITLE: git
 
+* rename
+
+** rename branch
+#+BEGIN_SRC sh
+git branch -m <oldname> <newname>
+# current branch
+git branch -m <newname>
+#+END_SRC
+
 * undo
 
 ** undo last commit
