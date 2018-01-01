@@ -213,3 +213,18 @@ git pull --all
 
     git branch -d release-1.2
 #+END_SRC
+
+* git submodules
+
+** remove git submodule
+#+BEGIN_SRC shell
+# Delete the relevant section from the .gitmodules file.
+# Stage the .gitmodules changes
+git add .gitmodules
+# Delete the relevant section from .git/config.
+git rm --cached path_to_submodule           # (no trailing slash)
+rm -rf .git/modules/path_to_submodule
+Commit git commit -m "Removed submodule <name>"
+# Delete the now untracked submodule files
+rm -rf path_to_submodule
+#+END_SRC
