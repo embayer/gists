@@ -350,12 +350,14 @@ You can also save the result into a Grep buffer using the action Save results in
 
 | <Meta-x> magit-status | show magit status buffer |
 
+| g       | Reload status buffer                  |
 | s       | Stage current hunk                    |
 | u       | Unstage current hunk                  |
 | S       | Stage all hunks                       |
 | U       | Unstage all hunks                     |
 | k       | Discard uncommitted changes           |
 | c       | Prepare for commit                    |
+| ca      | Prepare for commit amend              |
 | C-c C-c | Execute commit triggers commit action |
 | C-c C-a | Make the next commit an amend         |
 
