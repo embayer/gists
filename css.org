@@ -1,0 +1,20 @@
+* Tables
+
+** tds erben die width von ths
+
+** Elemente in tables sind vertikal zentriert
+
+#+BEGIN_SRC css
+td {
+  vertical-align: baseline;
+}
+#+END_SRC
+
+** borders
+
+#+BEGIN_SRC css
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+#+END_SRC

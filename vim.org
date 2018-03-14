@@ -255,6 +255,7 @@ In Normal mode:
 | cc       | change (replace) an entire line                                  |
 | cw       | change (replace) to the end of word                              |
 | c$       | change (replace) to the end of line                              |
+| ci"      | change (replace) inner ""                                        |
 
 
 * YouCompleteMe
