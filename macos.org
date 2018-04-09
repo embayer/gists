@@ -12,3 +12,7 @@
 * Windowmanager
 
 | <Cmd><F3> | show desktop |
+
+* Do Not Disturb
+
+| <Alt><Left-Click> Mitteilungszentrale | do not disturb |
