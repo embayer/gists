@@ -1,5 +1,12 @@
-* Virtual box resolution
+* VirtualBox
+** resolution
 - install guest additions in app
 - add optical device for vm
 - grant enough graphic card memory for vm
 - install guest additions in vm
+
+** prevent auto shutdowns
+open cmd.exe as admin
+#+BEGIN_SRC batch
+slmgr /rearm
+#+END_SRC
