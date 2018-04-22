@@ -3,6 +3,37 @@
 * Resources
 https://www.cs.swarthmore.edu/help/vim/home.html
 
+* Text Objects
+Text objects beginning with *a* include the surrounding white space in the text object, those starting with *i* do not.
+a word, inner word.
+
+| text object | description                                 |
+|-------------+---------------------------------------------|
+| w           | word (definition of word in var: iskeyword) |
+| W           | word (delimited by whitespace)              |
+| s           | sentence                                    |
+| p           | paragraph                                   |
+| "           | double quoted string                        |
+| '           | single quoted string                        |
+| `           | back quoted string                          |
+| )           | parenthesized block                         |
+| b           | parenthesized block                         |
+| ]           | bracketed block                             |
+| }           | brace block                                 |
+| B           | brace block                                 |
+| at          | tag block                                   |
+| >           | a single tag                                |
+
+- c% is equivalent to ca) (ca}...)
+
+
+** CamelCaseMotion
+
+CamelCaseMotion provides a text object to move by words within a camel or snake-cased word.
+
+| i,w  | inner camel or snake-cased word |
+| ci,w | delete word within              |
+
 * search and replace
 
 #+BEGIN_SRC
