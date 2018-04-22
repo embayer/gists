@@ -371,3 +371,14 @@ Seek to given time position in seconds. “hh:mm:ss[.xxx]” syntax is also supp
     say -f some_file.txt
 #+END_SRC
 
+
+* date
+** Yesterday
+#+BEGIN_SRC sh
+# BSD (MacOs)
+date -j -v-1d
+#+END_SRC
+** YYYY-DD-MM
+#+BEGIN_SRC sh
+date "+%Y-%m-%d"
+#+END_SRC
