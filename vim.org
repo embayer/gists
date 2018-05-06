@@ -3,6 +3,29 @@
 * Resources
 https://www.cs.swarthmore.edu/help/vim/home.html
 
+* Modes
+| Trigger  | Mode               |
+|----------+--------------------|
+| <Ctrl-o> | Insert Normal mode |
+
+* Operators
+Operator + Motion = Action
+| Trigger | Effect                                            |
+|---------+---------------------------------------------------|
+| c       | change                                            |
+| d       | delete                                            |
+| y       | yank                                              |
+| g~      | swap case                                         |
+| gu      | make lowercase                                    |
+| gU      | make uppercase                                    |
+| >       | shift right                                       |
+| <       | shift left                                        |
+| =       | autoindent                                        |
+| !       | filter {motion} lines through an external program |
+
+When an operator command is invoked in duplicate, it acts upon the current line.
+(gUU is a shorthand for gUgU)
+
 * Text Objects
 Text objects beginning with *a* include the surrounding white space in the text object, those starting with *i* do not.
 a word, inner word.
@@ -262,6 +285,7 @@ To operate only on the selected text
 | ``       | Return to the cursor position before the latest jump (undo the jump) (Two back ticks. This is above the Tab key on some keyboards.) |
 | '.       | Jump to the last-changed line.                                                                                                      |
 | 42G      | Jump to line 42 (same as 42gg :42<CR>                                                                                               |
+| zz       | center current line                                                                                                                 |
 
 mx 
 Set mark x at the current cursor position.
@@ -359,6 +383,9 @@ Line length is determined by
 
 * select text
 | gv | reselect block |
+
+** in visual mode
+| o | jump between start and end of selection |
 
 
 * more
