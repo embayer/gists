@@ -1,9 +1,29 @@
 #+TITLE: macOS
 
+https://apple.stackexchange.com/questions/400/please-share-your-hidden-macos-features-or-tips-and-tricks?answertab=votes#tab-top
+
+* defaults
+https://github.com/mathiasbynens/dotfiles/blob/master/.macos
+
 * Finder
 
 | <Cmd><Shift>G | open directory path |
 | <Cmd>1 - 2    | switch view         |
+| <Space>       | preview            |
+
+Start writing the name of a file or directory in Finder to select it.
+Press Tab and Shift+Tab to select the next and previous match.
+
+Resize a window while holding down the Option key to resize from the center.
+Press Shift to keep the aspect ratio. Press both keys to do both.
+
+Press the Option key in a file context menu to get the ability to copy the path of the file.
+For plain text destinations like the terminal, you can also press Cmd+C with the file selected and then Cmd+V in the terminal to paste the file path.
+
+Move a file by pressing Cmd+C and then Cmd+Option+V in the destination directory.
+
+In Finder, press Shift+Cmd+. to toggle hidden files.
+Works in the Open and Save dialog too.
 
 * input
 
@@ -16,3 +36,13 @@
 * Do Not Disturb
 
 | <Alt><Left-Click> Mitteilungszentrale | do not disturb |
+
+* Snooze notifications
+Click and hold the “Later” button in a notification for additional snooze options.
+
+* Definitions
+Do a three-finger tap on a word to view its definition.
+You can also press Ctrl+Cmd+D or force tap if you have Force Touch.
+
+* Menubar
+Rearrange menubar items by dragging one while pressing the Cmd key.
