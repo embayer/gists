@@ -1,6 +1,12 @@
 #+TITLE: apps
 
-* slack
+* Chrome
+* Developer Tools
+| Command        | Action     |
+|----------------+------------|
+| <Ctrl-Shift-p> | Omnisearch |
+
+* Slack
 
 ** shortcuts
 
@@ -26,7 +32,7 @@
 | /away                                    | Toggle your “away” status                                                                 |
 | /mute                                    | Mute a channel, or unmute a channel that is muted                                         |
 
-more
+*** more
 
 | Command                                  | Action                                                                                    |
 |------------------------------------------+-------------------------------------------------------------------------------------------|

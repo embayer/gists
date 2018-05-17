@@ -1,2 +1,0 @@
-* Developer Tools
-| <Ctrl-Shift-p> | Omnisearch |
