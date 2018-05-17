@@ -46,3 +46,7 @@ You can also press Ctrl+Cmd+D or force tap if you have Force Touch.
 
 * Menubar
 Rearrange menubar items by dragging one while pressing the Cmd key.
+
+* Password required
+Settings > Security & Privacy > Require password <time> after sleep or screen
+saver begins
