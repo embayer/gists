@@ -1,3 +1,18 @@
+* Immediately-Invoked Function Expression (IIFE)
+Maintain Readability for Conditional Assignments with JavaScript IIFEs
+
+This lesson will show you how you can use Immediately Invoked Function
+Expressions (IIFE's) to make conditional assignments more readable and robust
+
+#+BEGIN_SRC javascript
+const greeting = (() => {
+  if (isJoiningRoom) return 'Welcome'
+  if (isLeavingRoom) return 'Bye'
+  if (isReEnteringRoom) return 'Welcome back'
+  return 'Hi'
+})()
+#+END_SRC
+
 * date
 ** timedelta as objecct
 #+BEGIN_SRC javascript
