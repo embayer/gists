@@ -1,6 +1,17 @@
 #+TITLE: apps
 
-* slack
+* Chrome
+** Developer Tools
+https://developers.google.com/web/tools/chrome-devtools/shortcuts
+
+| Command          | Action                                                                               |
+|------------------+--------------------------------------------------------------------------------------|
+| <Ctrl-Shift-p>   | Command Menu https://developers.google.com/web/tools/chrome-devtools/ui#command-menu |
+| Command+Option+I | Open whatever panel you used last                                                    |
+| Command+Option+J | Open the Console panel                                                               |
+| Command+Option+C | Open the Elements panel                                                              |
+
+* Slack
 
 ** shortcuts
 
@@ -26,7 +37,7 @@
 | /away                                    | Toggle your “away” status                                                                 |
 | /mute                                    | Mute a channel, or unmute a channel that is muted                                         |
 
-more
+*** more
 
 | Command                                  | Action                                                                                    |
 |------------------------------------------+-------------------------------------------------------------------------------------------|
