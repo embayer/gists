@@ -41,6 +41,14 @@ export function getTimedeltaObject (momentStart, momentEnd) {
 * functional
 ** map
 ** reduce
+*** nested reduce
+#+BEGIN_SRC javascript
+const v = state.appointments.mitarbeiter.reduce((acc, value) => {
+  return acc + value.tage.reduce((accI, valueI) => {
+    return accI + valueI.elemente.length
+  }, 0)
+}, 0)
+#+END_SRC
 ** filter
 ** find
 ** stream
