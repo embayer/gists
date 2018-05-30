@@ -55,3 +55,20 @@ const v = state.appointments.mitarbeiter.reduce((acc, value) => {
 ** functor
 ** monad
 ** lenses
+
+* DOM
+** find parent node / element by name
+#+BEGIN_SRC javascript
+function domGetParentTagByName (node, tagName) {
+  let currentNode = node
+  const tag = tagName.toUpperCase()
+  while (true) {
+    if (currentNode.tagName === tag) return currentNode
+    if (currentNode.tagName === 'HTML') {
+      console.error(`couldn't find parent ${tag}`)
+      break
+    }
+    currentNode = currentNode.parentNode
+  }
+}
+#+END_SRC
