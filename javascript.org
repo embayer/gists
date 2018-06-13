@@ -21,6 +21,32 @@ function capitalizeFirstLetter (string) {
 }
 #+END_SRC
 
+* Array
+** move element
+#+BEGIN_SRC javascript
+function move (arr, oldIndex, requestedNewIndex) {
+  const clone = arr.slice(0)
+  const newIndex = (() => {
+    if (requestedNewIndex >= clone.length) return clone.length + 1
+    if (requestedNewIndex < 0) return 0
+    return requestedNewIndex
+  })()
+  clone.splice(newIndex, 0, clone.splice(oldIndex, 1)[0])
+  return clone
+}
+#+END_SRC
+
+** transpose elements
+#+BEGIN_SRC javascript
+function transpose (arr, x, y) {
+  const clone = arr.slice(0)
+  const tmp = clone[x]
+  clone[x] = clone[y]
+  clone[y] = tmp
+  return clone
+}
+#+END_SRC
+
 * date
 ** timedelta as objecct
 #+BEGIN_SRC javascript
