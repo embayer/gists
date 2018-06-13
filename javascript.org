@@ -1,8 +1,6 @@
 * Immediately-Invoked Function Expression (IIFE)
 Maintain Readability for Conditional Assignments with JavaScript IIFEs
-
-This lesson will show you how you can use Immediately Invoked Function
-Expressions (IIFE's) to make conditional assignments more readable and robust
+You can use Immediately Invoked Function Expressions (IIFE's) to make conditional assignments more readable and robust
 
 #+BEGIN_SRC javascript
 const greeting = (() => {
@@ -22,7 +20,7 @@ function capitalizeFirstLetter (string) {
 #+END_SRC
 
 * Array
-** move element
+** move element                                                  :immutable:
 #+BEGIN_SRC javascript
 function move (arr, oldIndex, requestedNewIndex) {
   const clone = arr.slice(0)
@@ -36,7 +34,7 @@ function move (arr, oldIndex, requestedNewIndex) {
 }
 #+END_SRC
 
-** transpose elements
+** transpose elements                                            :immutable:
 #+BEGIN_SRC javascript
 function transpose (arr, x, y) {
   const clone = arr.slice(0)
@@ -44,6 +42,18 @@ function transpose (arr, x, y) {
   clone[x] = clone[y]
   clone[y] = tmp
   return clone
+}
+#+END_SRC
+
+** sort array of objects                                         :immutable:
+#+BEGIN_SRC javascript
+function sortByKey (arr, key) {
+  const clone = arr.slice(0)
+  return clone.sort((a, b) => {
+    if (a[key] < b[key]) return -1
+    if (a[key] > b[key]) return 1
+    return 0
+  })
 }
 #+END_SRC
 
