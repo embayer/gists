@@ -20,6 +20,39 @@ function capitalizeFirstLetter (string) {
 #+END_SRC
 
 * Array
+** chunk
+*** functional approach
+#+BEGIN_SRC javascript
+const chunkSize = 2 // items per chunk
+
+const inputArray = ['a','b','c','d','e']
+
+inputArray.reduce((resultArray, item, index) => {
+  const chunkIndex = Math.floor(index/chunkSize)
+
+  if(!resultArray[chunkIndex]) {
+    resultArray[chunkIndex] = [] // start a new chunk
+  }
+
+  resultArray[chunkIndex].push(item)
+
+  return resultArray
+}, [])
+
+// result: [['a','b'], ['c','d'], ['e']]
+#+END_SRC
+
+*** imperative approach
+#+BEGIN_SRC javascript
+function chunk (arr, chunksize) {
+  const chunks = []
+  for (let i = 0; i < arr.length; i += chunkSize) {
+    chunks.push(arr.slice(i, i + chunkSize))
+  }
+  return chunks
+}
+#+END_SRC
+
 ** move element                                                  :immutable:
 #+BEGIN_SRC javascript
 function move (arr, oldIndex, requestedNewIndex) {
