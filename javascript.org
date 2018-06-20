@@ -1,6 +1,64 @@
+* limit function calls
+** throttle
+Throttling enforces a maximum number of times a function can be called
+over time.
+*Execute this function at most once every 100 milliseconds.*
+#+BEGIN_SRC javascript
+  function throttle (func, limit) {
+    let lastFunc
+    let lastRan
+    return function () {
+      const context = this
+      const args = arguments
+      if (!lastRan) {
+        func.apply(context, args)
+        lastRan = Date.now()
+      } else {
+        clearTimeout(lastFunc)
+        lastFunc = setTimeout(function() {
+          if ((Date.now() - lastRan) >= limit) {
+            func.apply(context, args)
+            lastRan = Date.now()
+          }
+        }, limit - (Date.now() - lastRan))
+      }
+    }
+  }
+#+END_SRC
+
+** debounce
+Debouncing enforces that a function not be called again until a
+certain amount of time has passed without it being called.
+*execute this function only if 100 milliseconds have passed without it being called.*
+#+BEGIN_SRC javascript
+  function debounce (func, delay) {
+    let inDebounce
+    return function () {
+      const context = this
+      const args = arguments
+      clearTimeout(inDebounce)
+      inDebounce = setTimeout(() =>
+          func.apply(context, args)
+        , delay)
+    }
+  }
+#+END_SRC
+
+** use in Vue
+#+BEGIN_SRC javascript
+...
+drag: throttle(function (event) {
+  // code
+}, 100),
+...
+
+#+END_SRC
+
+
 * Immediately-Invoked Function Expression (IIFE)
 Maintain Readability for Conditional Assignments with JavaScript IIFEs
-You can use Immediately Invoked Function Expressions (IIFE's) to make conditional assignments more readable and robust
+You can use Immediately Invoked Function Expressions (IIFE's) to make
+conditional assignments more readable and robust
 
 #+BEGIN_SRC javascript
 const greeting = (() => {
