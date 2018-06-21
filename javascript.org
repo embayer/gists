@@ -78,6 +78,16 @@ function capitalizeFirstLetter (string) {
 #+END_SRC
 
 * Array
+** minimum / maximum
+#+BEGIN_SRC javascript
+// min
+array.reduce((a, b) => Math.min(a, b))
+
+// max
+array.reduce((a, b) => Math.max(a, b))
+
+#+END_SRC
+
 ** chunk
 *** functional approach
 #+BEGIN_SRC javascript
