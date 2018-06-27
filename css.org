@@ -1,6 +1,5 @@
 * Tables
-
-** tds erben die width von ths
+- tds erben die width von ths
 
 ** Elemente in tables sind vertikal zentriert
 
@@ -18,3 +17,6 @@ table, th, td {
   border-collapse: collapse;
 }
 #+END_SRC
+
+* z-index
+- wird vererbt

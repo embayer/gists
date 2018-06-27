@@ -1,3 +1,14 @@
+* drag and drop
+https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API
+** Firefox: dragevents only fire when `initialized`
+#+BEGIN_SRC javascript
+event.dataTransfer.setData('text', this.id)
+#+END_SRC
+** IE: DataTransfer.setData() format param has to be 'text'
+#+BEGIN_SRC javascript
+event.dataTransfer.setData('text', this.id)
+#+END_SRC
+
 * limit function calls
 ** throttle
 Throttling enforces a maximum number of times a function can be called
