@@ -89,6 +89,16 @@ function capitalizeFirstLetter (string) {
 #+END_SRC
 
 * Array
+** generate Array of numbers
+#+BEGIN_SRC javascript
+// with spread operator
+[...Array(10).keys()]
+// without spread operator
+Array.from(Array(10).keys())
+// 1 based
+Array.from(Array(10), (e, i) => i + 1)
+#nEND_SRC
+
 ** minimum / maximum
 #+BEGIN_SRC javascript
 // min
@@ -170,6 +180,30 @@ function sortByKey (arr, key) {
 #+END_SRC
 
 * date
+** all days of a timedelta
+#+BEGIN_SRC javascript
+function getDaysOfTimedelta (start, end) {
+  let currentDay = moment(start).clone()
+  const lastDay = moment(end).clone().add(1, 'days') // get the last day too
+  const days = []
+  while (!currentDay.isSame(lastDay, 'day')) {
+    days.push(currentDay.format('YYYY-MM-DD'))
+    currentDay.add(1, 'days')
+  }
+  return days
+}
+#+END_SRC
+** all days of a month
+#+BEGIN_SRC javascript
+function getMonthDays (year = moment().year(), month = moment().month()) {
+  const daysInMonth = moment({y: year, M: month, d: 1}).daysInMonth() // amount
+  const monthDays = Array.from(Array(daysInMonth), (e, i) => i + 1) // eg [1, ..., 31]
+  return monthDays.map(x => {
+    return moment({y: year, M: month, d: x}).format('YYYY-MM-DD')
+  })
+},
+#+END_SRC
+
 ** timedelta as objecct
 #+BEGIN_SRC javascript
 import moment from 'moment'
