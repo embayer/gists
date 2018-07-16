@@ -1,0 +1,12 @@
+* create an HTML checkbox with a clickable label
+
+** Wrap the checkbox within a label tag
+#+BEGIN_SRC html
+<label><input type="checkbox" name="checkbox" value="value">Text</label>
+#+END_SRC
+
+** Use the for Attribute
+#+BEGIN_SRC html
+<input type="checkbox" name="checkbox" id="checkbox_id" value="value">
+<label for="checkbox_id">Text</label>
+#+END_SRC
