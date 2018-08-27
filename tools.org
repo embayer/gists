@@ -382,6 +382,10 @@ date -j -v-1d
 #+BEGIN_SRC sh
 date "+%Y-%m-%d"
 #+END_SRC
+** Next Monday
+#+BEGIN_SRC sh
+date -v Mon
+#+END_SRC
 ** Most recent Monday
 #+BEGIN_SRC sh
 date -v -Mon

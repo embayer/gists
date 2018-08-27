@@ -180,6 +180,10 @@ function sortByKey (arr, key) {
 #+END_SRC
 
 * date
+** translate weekday
+#+BEGIN_SRC javascript
+moment().locale('en').day('Montag').format('dddd')
+#+END_SRC
 ** all days of a timedelta
 #+BEGIN_SRC javascript
 function getDaysOfTimedelta (start, end) {
