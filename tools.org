@@ -406,3 +406,8 @@ distribute:
 output:
 	@echo Hi there!
 #+END_SRC
+
+**  condition: if file exists -> rename
+#+BEGIN_SRC sh
+	@if [ -f file_a ]; then mv file_a file_b; fi
+#+END_SRC
