@@ -40,3 +40,15 @@
 <input type="checkbox" name="checkbox" id="checkbox_id" value="value">
 <label for="checkbox_id">Text</label>
 #+END_SRC
+
+** add 'required field' asterisk to form inputs
+#+BEGIN_SRC html
+<div class="required">
+  <label>Name</label>
+  <input required type="text">
+</div>
+
+<style>
+  .required:after { content:" *"; }
+</style>
+#+END_SRC
