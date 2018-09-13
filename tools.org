@@ -390,3 +390,19 @@ date -v Mon
 #+BEGIN_SRC sh
 date -v -Mon
 #+END_SRC
+
+* make
+** reference Makefile directory
+#+BEGIN_SRC sh
+makefile_dir = $(shell pwd)
+
+distribute:
+	rm -rf $(makefile_dir)/dist/*
+	npm run build
+#+END_SRC
+
+** echo
+#+BEGIN_SRC sh
+output:
+	@echo Hi there!
+#+END_SRC
