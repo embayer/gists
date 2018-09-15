@@ -1,6 +1,47 @@
 #+TITLE: apps
 
+* Firefox
+
+| Command         | Action      |
+|-----------------+-------------|
+| <Cmd><Shift><r> | Reader View |
+
+** address bar
+<prefix><space> <search><Return>
+<Alt><Return/Click> -> open in new tab
+
+| prefix    | action          |
+|-----------+-----------------|
+| *         | bookmark search |
+| %         | tab search      |
+| /         | open file       |
+| #         | history search  |
+| <keyword> | keyword search  |
+
+*** keyword serch
+https://support.mozilla.org/en-US/kb/how-search-from-address-bar?redirectlocale=en-US&redirectslug=Smart+keywords
+- Visit the page on the target website that has the search field that you would normally use to search the site.
+- Hold down the Ctrl key while you click on the search field. Select Add a Keyword for this Search....
+- The Add Bookmark dialog appears. Enter an appropriate name for the bookmark (e.g. "The Internet Movie Database"). Create a keyword (e.g. "imdb").
+- Select the bookmark folder to contain the smart keyword. Click OK. 
+- To use the created smart bookmark, enter the keyword and the search string in the Location bar and then press Return. 
+
 * Chrome
+
+| Command          | Action                                   |
+|------------------+------------------------------------------|
+| <Alt-Delete>     | delete next word                         |
+| <Alt-Backspace>  | delete previous word                     |
+| <Cmd-Left/Right> | beginning/end of line                    |
+| <Alt-Left/Right> | previous/next word                       |
+| <Ctrl-k>         | kill from cursor position to end of line |
+| <Ctrl-f>         | move forward                             |
+| <Ctrl-b>         | move backward                            |
+| <Ctrl-a>         | beginning of line                        |
+| <Ctrl-e>         | end of line                              |
+| <Ctrl-h>         | delete backward                          |
+| <Ctrl-d>         | delete forward                           |
+
 ** Developer Tools
 https://developers.google.com/web/tools/chrome-devtools/shortcuts
 
@@ -10,6 +51,10 @@ https://developers.google.com/web/tools/chrome-devtools/shortcuts
 | Command+Option+I | Open whatever panel you used last                                                    |
 | Command+Option+J | Open the Console panel                                                               |
 | Command+Option+C | Open the Elements panel                                                              |
+
+* Outlook
+
+| <Cmd-Alt-t> | mark all messages as read |
 
 * Slack
 
