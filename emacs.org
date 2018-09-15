@@ -364,6 +364,7 @@ You can also save the result into a Grep buffer using the action Save results in
 | F       | Prepare for pull                      |
 | bb      | Checkout branch                       |
 | mm      | Merge                                 |
+| zz      | Stash                                 |
 
 * smartparens
 

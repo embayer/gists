@@ -382,3 +382,32 @@ date -j -v-1d
 #+BEGIN_SRC sh
 date "+%Y-%m-%d"
 #+END_SRC
+** Next Monday
+#+BEGIN_SRC sh
+date -v Mon
+#+END_SRC
+** Most recent Monday
+#+BEGIN_SRC sh
+date -v -Mon
+#+END_SRC
+
+* make
+** reference Makefile directory
+#+BEGIN_SRC sh
+makefile_dir = $(shell pwd)
+
+distribute:
+	rm -rf $(makefile_dir)/dist/*
+	npm run build
+#+END_SRC
+
+** echo
+#+BEGIN_SRC sh
+output:
+	@echo Hi there!
+#+END_SRC
+
+**  condition: if file exists -> rename
+#+BEGIN_SRC sh
+	@if [ -f file_a ]; then mv file_a file_b; fi
+#+END_SRC

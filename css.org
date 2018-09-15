@@ -20,3 +20,28 @@ table, th, td {
 
 * z-index
 - wird vererbt
+
+* Forms
+** Validation
+
+#+BEGIN_SRC css
+div {
+  margin-bottom: 10px;
+  position: relative;
+}
+
+input + span {
+  padding-right: 30px;
+}
+
+input:invalid+span:after {
+  position: absolute; content: '✖';
+  padding-left: 5px;
+}
+
+input:valid+span:after {
+  position: absolute;
+  content: '✓';
+  padding-left: 5px;
+}
+#+END_SRC
