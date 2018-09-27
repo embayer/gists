@@ -260,6 +260,7 @@ ls *.{mp3,exe,mp4}
 *** filetype
 #+begin_src sh
 convert image.jpg newimage.png
+convert big.jpg -resize 64x64 small.jpg
 #+end_src
 
 *** layered file
