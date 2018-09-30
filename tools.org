@@ -342,7 +342,12 @@ compare -compose src file-a.jpg file-b.jpg difference.png
 params ss, t:
 time position in seconds or “hh:mm:ss[.xxx]” syntax
 #+BEGIN_SRC sh
-    ffmpeg -i inputfile.mp3 -acodec copy -ss 00:00:00 -to 00:01:00  "output - file .mp3"
+    ffmpeg -i inputfile.mp3 -acodec copy -ss 00:00:00 -to 00:01:00 "output - file .mp3"
+#+END_SRC
+
+** set metadata
+#+BEGIN_SRC sh
+    ffmpeg -i inputfile.mp3 -acodec copy -ss 00:00:00 -to 00:01:00 -metadata author="output" -metadata TPE1="output"  -metadata title="file" "output - file .mp3"
 #+END_SRC
 
 ** merge videos
