@@ -338,11 +338,11 @@ compare -compose src file-a.jpg file-b.jpg difference.png
 
 * ffmpeg
 
-** cut video
+** cut video and audio
 params ss, t:
-Seek to given time position in seconds. “hh:mm:ss[.xxx]” syntax is also supported.
+time position in seconds or “hh:mm:ss[.xxx]” syntax
 #+BEGIN_SRC sh
-    ffmpeg -ss [start_seconds] -t [duration_seconds] -i [input_file] [outputfile]
+    ffmpeg -i inputfile.mp3 -acodec copy -ss 00:00:00 -to 00:01:00  "output - file .mp3"
 #+END_SRC
 
 ** merge videos
