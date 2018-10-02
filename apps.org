@@ -2,6 +2,63 @@
 
 * Firefox
 
+** Developer Console
+https://medium.com/frontmen/art-of-debugging-with-chrome-devtools-ab7b5fd8e0b4
+https://medium.com/google-developers/devtools-tips-for-sublime-text-users-cdd559ee80f8
+https://developers.google.com/web/updates/2015/07/set-a-breakpoint-based-on-a-certain-condition
+https://bgrins.github.io/devtools-snippets/
+
+*** styles panel
+
+| shortcut       | description      |
+|----------------+------------------|
+| <alt>-<up>     | increment by 0.1 |
+| <alt>-<down>   | decrement by 0.1 |
+| <shift>-<up>   | increment by 10  |
+| <shift>-<down> | decrement by 10  |
+
+*** console.log({})
+Instead of just logging variables, log objects by surrounding the variable names
+with {}.
+This will make the devtools nicely log the names of the variables together with
+the values.
+
+*** debug(fn)
+debug(fn) takes in a function reference as an argument and everytime that
+function is invoked, the debugger will then pause the execution on the first
+line of that function.
+
+Imagine you have to debug an issue with a button click. You have no idea where
+in the source code lies the handler for the button. Instead of digging through
+the source code, use the getEventListeners method as displayed above to get the
+reference to the click handler of the button and pass that function reference to
+the debug method. Then, if you click the button, devtools will pause the
+execution on the first line of the click handler.
+
+*** copy(obj)
+copy(anything) is a handy utility in the console that allows you to put anything
+into the system clipboard.
+
+Give copy some mangled JSON. It will pretty print it for you.
+
+*** Special variables
+
+| variable                      | description                                                                  |
+|-------------------------------+------------------------------------------------------------------------------|
+| $_                            | last evaluated expression                                                    |
+| $                             | documentQuerySelector (returns true array instead of an array-like NodeList) |
+| $$                            | documentQueryselectorAll                                                     |
+| $0                            | currently selected element in the Elements panel ($0 ... $4)                 |
+
+*** Special variables
+| variable                      | description                             |
+|-------------------------------+-----------------------------------------|
+| getEventListeners(domElement) | Chrome only                             |
+| copy(object)                  | copy pritty printed to system clipboard |
+|                               |                                         |
+
+
+** reader view
 | Command         | Action      |
 |-----------------+-------------|
 | <Cmd><Shift><r> | Reader View |
@@ -25,6 +82,12 @@ https://support.mozilla.org/en-US/kb/how-search-from-address-bar?redirectlocale=
 - The Add Bookmark dialog appears. Enter an appropriate name for the bookmark (e.g. "The Internet Movie Database"). Create a keyword (e.g. "imdb").
 - Select the bookmark folder to contain the smart keyword. Click OK. 
 - To use the created smart bookmark, enter the keyword and the search string in the Location bar and then press Return. 
+
+** about:config
+| browser.gesture.pinch.in        | cmd_fullZoomReduce  | zoom in  |
+| browser.gesture.pinch.out       | cmd_fullZoomEnlarge | zoom out |
+| browser.gesture.pinch.in.shift  | cmd_fullZoomReset   |          |
+| browser.gesture.pinch.out.shift | cmd_fullZoomReset   |          |
 
 * Chrome
 
