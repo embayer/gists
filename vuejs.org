@@ -1,0 +1,13 @@
+* :key
+** reset components on routechange
+#+BEGIN_SRC html
+<a-component>:key="$route.fullPath"</a-component>
+#+END_SRC
+
+** prevent caching
+#+BEGIN_SRC html
+<ul>
+  <li :key="apple" v-if="isApple"><i class="fab fa-apple"></i></li>
+  <li :key="linux" v-if="isLinux"><i class="fab fa-linux"></i></li>
+</ul>
+#+END_SRC
