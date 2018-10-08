@@ -1,3 +1,12 @@
+* $forceUpdate()
+use when the object ({} || []) changes are not reflacted by render
+
+* $options
+access component `name`
+#+BEGIN_SRC javascript
+this.$options.name
+#+END_SRC
+
 * :key
 ** reset components on routechange
 #+BEGIN_SRC html
