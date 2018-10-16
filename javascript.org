@@ -246,6 +246,14 @@ const v = state.appointments.mitarbeiter.reduce((acc, value) => {
 ** functor
 ** monad
 ** lenses
+** findIndex
+*** remove duplicates (!unique) from array of objects
+filter out elements on other index positions
+#+BEGIN_SRC javascript
+[{id: 1}, {id: 2}, {id: 2}].filter((x, index, self) =>
+  index === self.findIndex(y => y.id === x.id)
+)
+#+END_SRC
 
 * DOM
 ** find parent node / element by name
