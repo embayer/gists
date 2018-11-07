@@ -1,3 +1,36 @@
+* remove umlaute
+#+BEGIN_SRC javascript
+// used for sort
+export function removeUmlauts (str) {
+  return str
+    .replace(/Ä/g, 'A')
+    .replace(/ä/g, 'a')
+    .replace(/Ö/g, 'O')
+    .replace(/ö/g, 'o')
+    .replace(/Ü/g, 'U')
+    .replace(/ü/g, 'u')
+    .replace(/ß/g, 'ss')
+}
+#+END_SRC
+
+* unique hex colors for strings
+#+BEGIN_SRC javascript
+// helper function to generate hexcolors for strings
+stringToColour: function (str) {
+  // employee color
+  let hash = 0
+  for (let i = 0; i < str.length; i++) {
+    hash = str.charCodeAt(i) + ((hash << 5) - hash)
+  }
+  let colour = '#'
+  for (let i = 0; i < 3; i++) {
+    let value = (hash >> (i * 8)) & 0xFF
+    colour += ('00' + value.toString(16)).substr(-2)
+  }
+  return colour
+}
+#+END_SRC
+
 * drag and drop
 https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API
 ** Firefox: dragevents only fire when `initialized`
@@ -81,6 +114,14 @@ const greeting = (() => {
 #+END_SRC
 
 * String
+
+** replcae
+replaces only the first occurrence when invoked with two strings
+#+BEGIN_SRC javascript
+'2018-10-22'.replace('-', '_')  // '2018_10-22'
+'2018-10-22'.replace(/-/g, '_')  // '2018_10_22'
+#+END_SRC
+
 ** uppercase first letter
 #+BEGIN_SRC javascript
 function capitalizeFirstLetter (string) {
@@ -89,6 +130,10 @@ function capitalizeFirstLetter (string) {
 #+END_SRC
 
 * Array
+** sort with lookuptable
+#+BEGIN_SRC javascript
+arr.sort((a, b) => lookuptable.indexOf(a) - lookuptable.indexOf(b))
+#+END_SRC
 ** generate Array of numbers
 #+BEGIN_SRC javascript
 // with spread operator
@@ -170,7 +215,7 @@ function transpose (arr, x, y) {
 ** sort array of objects                                         :immutable:
 #+BEGIN_SRC javascript
 function sortByKey (arr, key) {
-  const clone = arr.slice(0)
+  const clone = JSON.parse(JSON.stringify(arr))
   return clone.sort((a, b) => {
     if (a[key] < b[key]) return -1
     if (a[key] > b[key]) return 1
@@ -184,7 +229,18 @@ function sortByKey (arr, key) {
 arr.sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase()))
 #+END_SRC
 
+* Object
+** get the value of nested object property by string key ('foo.bar')
+#+BEGIN_SRC javascript
+function getNestedProperty (obj, key) {
+    return key.split('.').reduce(function(result, key) {
+       return result[key]
+    }, obj)
+}
+#+END_SRC
+
 * date
+*months are zerobased!*
 ** translate weekday
 #+BEGIN_SRC javascript
 moment().day('Montag').locale('en').format('dddd')

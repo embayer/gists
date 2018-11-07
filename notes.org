@@ -1,0 +1,4 @@
+* GMail
+Ignores `.`s. so:
+justin.case.gmail.com  == just.in.case.gmail.com
+So multiple signups with the same email address are possible.

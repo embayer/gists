@@ -417,3 +417,44 @@ output:
 #+BEGIN_SRC sh
 	@if [ -f file_a ]; then mv file_a file_b; fi
 #+END_SRC
+
+* npm
+
+** SemVer (semantic versioning)
+A simple semver version number looks like this: 1.5.4. These three numbers, left to right, are called:
+
+*** major
+*** minor
+*** and patch versions.
+
+A more descriptive way to think of them is as:
+
+*** breaking
+*** feature
+*** and fix versions.
+
+*** wildcards
+
+| ^ | same major range | default                        |
+| ~ | same minor range | npm config set save-prefix='~' |
+
+** package-lock.json
+package-lock.json is automatically generated for any operations where
+npm modifies either the node_modules tree, or package.json. It
+describes the exact tree that was generated, such that subsequent
+installs are able to generate identical trees, regardless of
+intermediate dependency updates.
+
+*This file is intended to be committed into source repositories*, and serves various purposes:
+
+*** dependency tree
+Describe a single representation of a dependency tree such that
+teammates, deployments, and continuous integration are guaranteed to
+install exactly the same dependencies.
+*** time-travel (no wildcards)
+Provide a facility for users to "time-travel" to previous states of
+node_modules without having to commit the directory itself.
+*** visibility of tree changes
+through readable source control diffs.
+*** optimized installation process
+by allowing npm to skip repeated metadata resolutions for previously-installed packages.
