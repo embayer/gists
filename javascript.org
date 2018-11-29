@@ -1,6 +1,3 @@
-[...document.querySelectorAll('#sidebar-right .v-select')].forEach(element => element.classList.add('disabled'))
-[...document.querySelectorAll('#sidebar-right input, select, textarea, button')].forEach(element => element.setAttribute('disabled', 'disabled'))
-
 * Logging
 ** expandedLog
 #+BEGIN_SRC javascript
@@ -34,6 +31,13 @@ expandedLog = (function(){
         }
     }
 })()
+#+END_SRC
+* format float
+#+BEGIN_SRC javascript
+function roundedToFixed (value, digits) {
+  const power = Math.pow(10, digits || 0)
+  return (Math.round(value * power) / power).toFixed(digits)
+}
 #+END_SRC
 
 * Destructuring assignment
