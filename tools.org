@@ -1,5 +1,17 @@
 #+TITLE: shell tools
 
+* find
+**  remove all files in a directory except hidden ones
+rm * works fine if your directory doesn't contain
+subdirectories. However, if you need a recursive solution that also
+removes all subdirectories, then (as @meesern has pointed out) rm -r *
+is not what you want, since it does remove hidden files and
+subdirectories.
+
+#+BEGIN_SRC sh
+find YOUR_DIRECTORY -not -path '*/\.*' -delete
+#+END_SRC
+
 * du
 
 ** directory size

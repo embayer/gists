@@ -1,3 +1,11 @@
+* display line breaks
+\n in strings
+#+BEGIN_SRC css
+.line-break {
+  white-space: pre-line;
+}
+#+END_SRC
+
 * Tables
 - tds erben die width von ths
 
