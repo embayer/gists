@@ -16,9 +16,9 @@
 #+END_SRC
 
 * Tables
-- tds erben die width von ths
+- tds inherit width from ths
 
-** Elemente in tables sind vertikal zentriert
+** Elements in tables are vertically centered
 
 #+BEGIN_SRC css
 td {
@@ -36,7 +36,7 @@ table, th, td {
 #+END_SRC
 
 * z-index
-- wird vererbt
+- is inherited
 
 * Forms
 ** Validation
@@ -52,7 +52,8 @@ input + span {
 }
 
 input:invalid+span:after {
-  position: absolute; content: '✖';
+  position: absolute;
+  content: '✖';
   padding-left: 5px;
 }
 
