@@ -1,3 +1,12 @@
+* float
+** bootstrap flat utilities
+#+BEGIN_SRC html
+<div class="bg-info clearfix"><!-- flaot only in this container -->
+  <button type="button" class="btn btn-secondary float-left">Example Button floated left</button>
+  <button type="button" class="btn btn-secondary float-right">Example Button floated right</button>
+</div>
+#+END_SRC
+
 * display line breaks
 \n in strings
 #+BEGIN_SRC css
