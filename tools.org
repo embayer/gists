@@ -470,3 +470,41 @@ node_modules without having to commit the directory itself.
 through readable source control diffs.
 *** optimized installation process
 by allowing npm to skip repeated metadata resolutions for previously-installed packages.
+
+* fx
+https://github.com/antonmedv/fx/blob/master/docs.md
+
+** Interactive mode
+Click on fields to expand or collapse JSON tree, use mouse wheel to scroll view.
+
+Next commands available in interactive mode:
+
+| Key                | Command             |
+|--------------------+---------------------|
+| q or Esc or Ctrl+c | Exit                |
+| e/E                | Expand/Collapse all |
+| g/G                | Goto top/bottom     |
+| up/down            | Move cursor up/down |
+| left/right         | Expand/Collapse     |
+| .                  | Edit filter         |
+
+These commands are available when editing the filter:
+
+| Key     | Command             |
+|---------+---------------------|
+| Enter   | Apply filter        |
+| Ctrl+u  | Clear filter        |
+| Ctrl+w  | Delete last part    |
+| up/down | Select autocomplete |
+
+Selecting text
+You may found what you can't just select text in fx. This is due the
+fact that all mouse events redirected to stdin. To be able select
+again you need instruct your terminal not to do it. This can be done
+by holding special keys while selecting:
+
+| Key          | Terminal      |
+|--------------+---------------|
+| Option+Mouse | iTerm2, Hyper |
+| Fn+Mouse     | Terminal.app  |
+| Shift+Mouse  | Linux         |
