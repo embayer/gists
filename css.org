@@ -1,7 +1,24 @@
-* Tables
-- tds erben die width von ths
+* float
+** bootstrap flat utilities
+#+BEGIN_SRC html
+<div class="bg-info clearfix"><!-- flaot only in this container -->
+  <button type="button" class="btn btn-secondary float-left">Example Button floated left</button>
+  <button type="button" class="btn btn-secondary float-right">Example Button floated right</button>
+</div>
+#+END_SRC
 
-** Elemente in tables sind vertikal zentriert
+* display line breaks
+\n in strings
+#+BEGIN_SRC css
+.line-break {
+  white-space: pre-line;
+}
+#+END_SRC
+
+* Tables
+- tds inherit width from ths
+
+** Elements in tables are vertically centered
 
 #+BEGIN_SRC css
 td {
@@ -19,7 +36,7 @@ table, th, td {
 #+END_SRC
 
 * z-index
-- wird vererbt
+- is inherited
 
 * Forms
 ** Validation
@@ -35,7 +52,8 @@ input + span {
 }
 
 input:invalid+span:after {
-  position: absolute; content: '✖';
+  position: absolute;
+  content: '✖';
   padding-left: 5px;
 }
 
