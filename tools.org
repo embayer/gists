@@ -106,9 +106,9 @@ ls *.{mp3,exe,mp4}
 #+END_SRC
 
 
-** delete lines containing pattern
+** delete lines containing pattern (inline)
 #+BEGIN_SRC sh
-    sed '/<pattern>/d' file
+    sed -i '' '/<pattern>/d' file
 #+END_SRC
 
 ** delete lines not containing pattern a or b

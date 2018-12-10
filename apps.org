@@ -171,3 +171,19 @@ https://developers.google.com/web/tools/chrome-devtools/shortcuts
 | /shortcuts                               | Open the keyboard shortcuts dialog                                                        |
 | /topic [text]                            | Set the channel topic                                                                     |
 | /who                                     | List users in the current channel                                                         |
+
+* GMail
+Ignores `.`s. so:
+justin.case.gmail.com  == just.in.case.gmail.com
+So multiple signups with the same email address are possible.
+
+Insert one or several dots (".") anywhere in your email address. Gmail doesn't
+recognize periods as characters in addresses -- we just ignore them. For
+example, you could tell people your address was hikingfan@gmail.com,
+hiking.fan@gmail.com or hi.kin.g.fan@gmail.com. (We understand that there has
+been some confusion about this in the past, but to settle it once and for all,
+you can indeed receive mail at all the variations with dots.)
+
+Append a plus ("+") sign and any combination of words or numbers after your
+email address. For example, if your name was hikingfan@gmail.com, you could send
+mail to hikingfan+friends@gmail.com or hikingfan+mailinglists@gmail.com.
