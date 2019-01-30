@@ -25,6 +25,10 @@
 | <Ctrl-h> k            | describe key                                 |
 | <Meta-x> info <Enter> | read the documentation                       |
 
+** minibuffer
+
+| <Ctrl-g> | abort |
+
 ** save
 
 | <Ctrl-x> <Ctrl-s> | save the current buffer                           |
