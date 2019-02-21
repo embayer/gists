@@ -1,3 +1,14 @@
+* vuex
+** prevent getter caching
+#+BEGIN_SRC javascript
+// $store
+aGetter: (state, getters) => () => {
+  return 1
+}
+// component
+const one = aGetter()
+#+END_SRC
+
 * router
 ** access the root instance in $router
 #+BEGIN_SRC javascript

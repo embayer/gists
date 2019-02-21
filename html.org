@@ -71,3 +71,96 @@ for visible whitespace (e.g. with background-color).
   .required:after { content:" *"; }
 </style>
 #+END_SRC
+
+* Events
+https://www.w3schools.com/jsref/dom_obj_event.asp
+
+|--------------------+------------------------------------------------------------------------------------------------------------------------------+-------------------------------|
+| Event              | Description                                                                                                                  | Belongs To                    |
+|--------------------+------------------------------------------------------------------------------------------------------------------------------+-------------------------------|
+| abort              | when the loading of a media is aborted                                                                                       | UiEvent, Event                |
+| afterprint         | when a page has started printing, or if the print dialogue box has been closed                                               | Event                         |
+| animationend       | when a CSS animation has completed                                                                                           | AnimationEvent                |
+| animationiteration | when a CSS animation is repeated                                                                                             | AnimationEvent                |
+| animationstart     | when a CSS animation has started                                                                                             | AnimationEvent                |
+| beforeprint        | when a page is about to be printed                                                                                           | Event                         |
+| beforeunload       | before the document is about to be unloaded                                                                                  | UiEvent, Event                |
+| blur               | when an element loses focus                                                                                                  | FocusEvent                    |
+| canplay            | when the browser can start playing the media (when it has buffered enough to begin)                                          | Event                         |
+| canplaythrough     | when the browser can play through the media without stopping for buffering                                                   | Event                         |
+| change             | when the content of a form element, the selection, or the checked state have changed (for <input>, <select>, and <textarea>) | Event                         |
+| click              | when the user clicks on an element                                                                                           | MouseEvent                    |
+| contextmenu        | when the user right-clicks on an element to open a context menu                                                              | MouseEvent                    |
+| copy               | when the user copies the content of an element                                                                               | ClipboardEvent                |
+| cut                | when the user cuts the content of an element                                                                                 | ClipboardEvent                |
+| dblclick           | when the user double-clicks on an element                                                                                    | MouseEvent                    |
+| drag               | when an element is being dragged                                                                                             | DragEvent                     |
+| dragend            | when the user has finished dragging an element                                                                               | DragEvent                     |
+| dragenter          | when the dragged element enters the drop target                                                                              | DragEvent                     |
+| dragleave          | when the dragged element leaves the drop target                                                                              | DragEvent                     |
+| dragover           | when the dragged element is over the drop target                                                                             | DragEvent                     |
+| dragstart          | when the user starts to drag an element                                                                                      | DragEvent                     |
+| drop               | when the dragged element is dropped on the drop target                                                                       | DragEvent                     |
+| durationchange     | when the duration of the media is changed                                                                                    | Event                         |
+| ended              | when the media has reach the end (useful for messages like "thanks for listening")                                           | Event                         |
+| error              | when an error occurs while loading an external file                                                                          | ProgressEvent, UiEvent, Event |
+| focus              | when an element gets focus                                                                                                   | FocusEvent                    |
+| focusin            | when an element is about to get focus                                                                                        | FocusEvent                    |
+| focusout           | when an element is about to lose focus                                                                                       | FocusEvent                    |
+| fullscreenchange   | when an element is displayed in fullscreen mode                                                                              | Event                         |
+| fullscreenerror    | when an element can not be displayed in fullscreen mode                                                                      | Event                         |
+| hashchange         | when there has been changes to the anchor part of a URL                                                                      | HashChangeEvent               |
+| input              | when an element gets user input                                                                                              | InputEvent, Event             |
+| invalid            | when an element is invalid                                                                                                   | Event                         |
+| keydown            | when the user is pressing a key                                                                                              | KeyboardEvent                 |
+| keypress           | when the user presses a key                                                                                                  | KeyboardEvent                 |
+| keyup              | when the user releases a key                                                                                                 | KeyboardEvent                 |
+| load               | when an object has loaded                                                                                                    | UiEvent, Event                |
+| loadeddata         | when media data is loaded                                                                                                    | Event                         |
+| loadedmetadata     | when meta data (like dimensions and duration) are loaded                                                                     | Event                         |
+| loadstart          | when the browser starts looking for the specified media                                                                      | ProgressEvent                 |
+| message            | when a message is received through the event source                                                                          | Event                         |
+| mousedown          | when the user presses a mouse button over an element                                                                         | MouseEvent                    |
+| mouseenter         | when the pointer is moved onto an element                                                                                    | MouseEvent                    |
+| mouseleave         | when the pointer is moved out of an element                                                                                  | MouseEvent                    |
+| mousemove          | when the pointer is moving while it is over an element                                                                       | MouseEvent                    |
+| mouseover          | when the pointer is moved onto an element, or onto one of its children                                                       | MouseEvent                    |
+| mouseout           | when a user moves the mouse pointer out of an element, or out of one of its children                                         | MouseEvent                    |
+| mouseup            | when a user releases a mouse button over an element                                                                          | MouseEvent                    |
+| mousewheel         | Deprecated. Use the wheel event instead                                                                                      | WheelEvent                    |
+| offline            | when the browser starts to work offline                                                                                      | Event                         |
+| online             | when the browser starts to work online                                                                                       | Event                         |
+| open               | when a connection with the event source is opened                                                                            | Event                         |
+| pagehide           | when the user navigates away from a webpage                                                                                  | PageTransitionEvent           |
+| pageshow           | when the user navigates to a webpage                                                                                         | PageTransitionEvent           |
+| paste              | when the user pastes some content in an element                                                                              | ClipboardEvent                |
+| pause              | when the media is paused either by the user or programmatically                                                              | Event                         |
+| play               | when the media has been started or is no longer paused                                                                       | Event                         |
+| playing            | when the media is playing after having been paused or stopped for buffering                                                  | Event                         |
+| popstate           | when the window's history changes                                                                                            | PopStateEvent                 |
+| progress           | when the browser is in the process of getting the media data (downloading the media)                                         | Event                         |
+| ratechange         | when the playing speed of the media is changed                                                                               | Event                         |
+| resize             | when the document view is resized                                                                                            | UiEvent, Event                |
+| reset              | when a form is reset                                                                                                         | Event                         |
+| scroll             | when an element's scrollbar is being scrolled                                                                                | UiEvent, Event                |
+| search             | when the user writes something in a search field (for <input="search">)                                                      | Event                         |
+| seeked             | when the user is finished moving/skipping to a new position in the media                                                     | Event                         |
+| seeking            | when the user starts moving/skipping to a new position in the media                                                          | Event                         |
+| select             | after the user selects some text (for <input> and <textarea>)                                                                | UiEvent, Event                |
+| show               | when a <menu> element is shown as a context menu                                                                             | Event                         |
+| stalled            | when the browser is trying to get media data, but data is not available                                                      | Event                         |
+| storage            | when a Web Storage area is updated                                                                                           | StorageEvent                  |
+| submit             | when a form is submitted                                                                                                     | Event                         |
+| suspend            | when the browser is intentionally not getting media data                                                                     | Event                         |
+| timeupdate         | when the playing position has changed (like when the user fast forwards to a different point in the media)                   | Event                         |
+| toggle             | when the user opens or closes the <details> element                                                                          | Event                         |
+| touchcancel        | when the touch is interrupted                                                                                                | TouchEvent                    |
+| touchend           | when a finger is removed from a touch screen                                                                                 | TouchEvent                    |
+| touchmove          | when a finger is dragged across the screen                                                                                   | TouchEvent                    |
+| touchstart         | when a finger is placed on a touch screen                                                                                    | TouchEvent                    |
+| transitionend      | when a CSS transition has completed                                                                                          | TransitionEvent               |
+| unload             | once a page has unloaded (for <body>)                                                                                        | UiEvent, Event                |
+| volumechange       | when the volume of the media has changed (includes setting the volume to "mute")                                             | Event                         |
+| waiting            | when the media has paused but is expected to resume (like when the media pauses to buffer more data)                         | Event                         |
+| wheel              | when the mouse wheel rolls up or down over an element                                                                        | WheelEvent                    |
+|--------------------+------------------------------------------------------------------------------------------------------------------------------+-------------------------------|
