@@ -185,6 +185,32 @@
 | :=vsum(@2..@9)  | sum of row 2 -9      |
 | :=vmean($1..$9) | mean of column 1 - 9 |
 
+*** sum rows
+**** The last row of a table is @> get the sum for the third column in the last line
+#+BEGIN_SRC org-mode
+| x   | y |
+|-----+---|
+| a   | 1 |
+| b   | 2 |
+| c   | 3 |
+|-----+---|
+| sum | 6 |
+#+TBLFM: @>$2=vsum(@I..@II)
+#+END_SRC
+
+**** Horizontal lines (@I, @II, etc.) used to structure the table
+#+BEGIN_SRC org-mode
+| x   | y |
+|-----+---|
+| a   | 1 |
+| b   | 2 |
+| c   | 3 |
+|-----+---|
+| sum | 6 |
+#+TBLFM: @>$2=vsum(@I..@II)
+#+END_SRC
+
+
 ** links
 
 | <Ctrl-c> <Ctrl-l>          | insert a link (TAB completes stored links) / edit link at point |
