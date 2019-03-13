@@ -1,5 +1,11 @@
 #+TITLE: python
 
+* ternary operator
+#+BEGIN_SRC python
+test = source and source or 0
+‘x’ + source and source or ‘’ + ‘y’
+#+END_SRC
+
 * padding
 
 ** leftpadding
