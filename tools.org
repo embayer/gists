@@ -408,6 +408,12 @@ date -v Mon
 #+BEGIN_SRC sh
 date -v -Mon
 #+END_SRC
+** Unix timestamp to date
+#+BEGIN_SRC sh
+date -r 1551913140000
+# gnu coreutils:
+# gdate -d @1551913140000
+#+END_SRC
 
 * make
 ** reference Makefile directory

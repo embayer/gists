@@ -1,3 +1,37 @@
+* Equality comparisons and sameness
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Equality_comparisons_and_sameness
+https://dorey.github.io/JavaScript-Equality-Table/
+
+if (what) { /* executes (yes || no) */ }
+
+|-----------+----------|
+| what      | executes |
+|-----------+----------|
+| true      | yes      |
+| false     | no       |
+| 1         | yes      |
+| 0         | no       |
+| -1        | yes      |
+| "true"    | yes      |
+| "false"   | yes      |
+| "1"       | yes      |
+| "0"       | yes      |
+| "-1"      | yes      |
+| ""        | no       |
+| null      | no       |
+| undefined | no       |
+| Infinity  | yes      |
+| -Infinity | yes      |
+| []        | yes      |
+| {}        | yes      |
+| [[]]      | yes      |
+| [0]       | yes      |
+| [1]       | yes      |
+| NaN       | no       |
+|-----------+----------|
+
+*Always use 3 equals unless you have a good reason to use 2.*
+
 * Logging
 ** expandedLog
 #+BEGIN_SRC javascript
@@ -42,6 +76,9 @@ function roundedToFixed (value, digits) {
 
 * Destructuring assignment
 unpack values from arrays, or properties from objects, into distinct variables
+Syntax is:
+{incomingProperty: parameterName = defaultValue} = theObject
+
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment
 
 ** array
@@ -64,7 +101,7 @@ console.log(rest)
 
 ** default values
 #+BEGIN_SRC javascript
-[a=5, b=7] = [1]
+[a = 5, b = 7] = [1]
 console.log(a) // 1
 console.log(b) // 7
 #+END_SRC
@@ -109,6 +146,17 @@ const {a: aa = 10, b: bb = 5} = {a: 3}
 
 console.log(aa) // 3
 console.log(bb) // 5
+#+END_SRC
+
+** Destructing nested objects
+#+BEGIN_SRC javascript
+const user = {
+  id: 339,
+  name: 'Fred',
+  age: 42
+};
+const {education: {school: {name}} = {school: {name: 'Dunno'}}} = user;
+console.log(name); //prints: Dunno
 #+END_SRC
 
 * remove umlaute
@@ -259,6 +307,25 @@ function capitalizeFirstLetter (string) {
 #+END_SRC
 
 * Array
+| Mutating  |                                     |
+|-----------+-------------------------------------|
+| push()    | Insert an element at the end        |
+| pop()     | Remove an element from the end      |
+| unshift() | Inserts an element in the beginning |
+| shift()   | Remove first element                |
+
+| Iterating |                                                     |
+|-----------+-----------------------------------------------------|
+| forEach() | Iterates an array                                   |
+| filter()  | Iterates an array and result is filtered array      |
+| map()     | Iterates an array and result is new array           |
+| reduce()  | "Reduces" the array into single value (accumulator) |
+
+| Others    |                                                     |
+|-----------+-----------------------------------------------------|
+| slice()   | Returns desired elements in a new array             |
+| concat()  | Append one or more arrays with given array          |
+
 ** generate
 *** range
 #+BEGIN_SRC javascript
