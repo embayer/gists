@@ -41,6 +41,37 @@ into the system clipboard.
 
 Give copy some mangled JSON. It will pretty print it for you.
 
+*** log JSON
+https://stackoverflow.com/questions/10464844/is-there-a-way-to-auto-expand-objects-in-chrome-dev-tools
+console.table()
+
+or
+
+#+BEGIN_SRC javascript
+var expandedLog = (function(MAX_DEPTH){
+
+    return function(item, depth){
+
+        depth    = depth || 0;
+        isString = typeof item === 'string';
+        isDeep   = depth > MAX_DEPTH
+
+        if (isString || isDeep) {
+            console.log(item);
+            return;
+        }
+
+        for(var key in item){
+            console.group(key + ' : ' +(typeof item[key]));
+            expandedLog(item[key], depth + 1);
+            console.groupEnd();
+        }
+    }
+})(100);
+#+END_SRC
+
+
+
 *** Special variables
 
 | variable                      | description                                                                  |

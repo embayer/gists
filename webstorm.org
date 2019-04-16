@@ -51,3 +51,5 @@ The list of available options ("wrappers") is context-sensitive and depends on t
 * Tag Name Completion
 A special variant of the Code Completion feature invoked by pressing ⌃Space twice allows you to complete XML tag names from namespaces not declared in the current file. If the namespace is not declared yet the declaration is generated automatically.
 
+
+move line

@@ -37,3 +37,30 @@ this.$options.name
   <li :key="linux" v-if="isLinux"><i class="fab fa-linux"></i></li>
 </ul>
 #+END_SRC
+
+* Lifecycle
+A component is destroyed when a v-if at the component becomes false:
+
+#+BEGIN_SRC html
+<my-component v-if="isFalse"></my-component>
+#+END_SRC
+
+This doesn't work within the component:
+
+#+BEGIN_SRC html
+<template>
+  <div
+    id="my-component"
+    v-if="isFalse"
+  >
+  ...
+#+END_SRC
+
+The behaviour can be levered out with keep-alive:
+
+#+BEGIN_SRC html
+<!-- Inactive components will be cached! -->
+<keep-alive>
+  <my-component v-if="isFalse"></my-component>
+</keep-alive>
+#+END_SRC

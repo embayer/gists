@@ -600,3 +600,23 @@ function deepClone (obj) {
   throw new Error("Unable to copy obj as type isn't supported " + obj.constructor.name);
 }
 #+END_SRC
+
+* parseInt() gotchas
+#+BEGIN_SRC javascript
+parseInt("10"); // Result: 10
+parseInt("10.00"); // Result: 10
+parseInt("10.33"); // Result: 10
+parseInt("34 45 66"); // Result: 34
+parseInt("   60   "); // Result: 60
+parseInt("40 years"); // Result: 40
+parseInt("He was 40"); // Result: NaN
+
+parseInt("10", 10); // Result: 10
+parseInt("010"); // Result: 8 - because it begins with 0
+parseInt("010", 10); // Result: 10 - because base 10 is specified
+                     // and that is more important than it
+                     // beginning with a 0.
+parseInt("10", 8); // Result: 8 - because base 8 is specified
+parseInt("0x10"); // Result: 16 - because it begins with 0x
+parseInt("10", 16); // Result: 16 - because base 16 is specified
+#+END_SRC
