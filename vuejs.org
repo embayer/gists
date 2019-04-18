@@ -1,3 +1,79 @@
+* Styleguide
+https://vuejs.org/v2/style-guide/#Component-style-scoping-essential
+
+* vue-multiselect
+https://vue-multiselect.js.org/
+
+** Custom template
+#+BEGIN_SRC html
+<multiselect
+  v-model="x"
+  @tag="setFreeCustomer"
+  @input="setCustomer"
+  label="label"
+  track-by="id"
+  :options="xs"
+  placeholder="X"
+  :optionsLimit="1000000"
+  :taggable="true"
+  :deselectLabel="multiselectLabels.deselectLabel"
+  :selectedLabel="multiselectLabels.selectedLabel"
+  :selectLabel="multiselectLabels.selectLabel"
+  :tagPlaceholder="multiselectLabels.tagPlaceholder"
+>
+  <template slot="singleLabel" slot-scope="props">{{props.option.label}}</template>
+  <template slot="option" slot-scope="props">{{props.option | formatOption('kdnr')}}</template>
+</multiselect>
+
+<script>
+formatOption (value, idKey) {
+  return value[idKey] ? `${value.label} (${value[idKey]})` : value.label
+}
+</script>
+#+END_SRC
+
+* Prop default value
+#+BEGIN_SRC javascript
+  props: {
+    width: {
+      type: String,
+      default: '50%'
+    }
+  },
+#+END_SRC
+
+* Computed properties
+
+** Chaining
+Computed Properties can be changed
+#+BEGIN_SRC javascript
+data: {
+  numbers: [5, 1, 4, 3, 2, 7]
+},
+computed: {
+  evenNumbers: function () {
+    return this.numbers.filter(function (number) {
+      return number % 2 === 0
+    })
+  }
+  evenNumbersSorted: function () {
+    return this.evenNumbers.sort()
+  }
+#+END_SRC
+
+* v-for
+** With range
+#+BEGIN_SRC html
+<div>
+  <span v-for="n in 10">{{ n }} </span>
+</div>
+#+END_SRC
+
+** In combination with v-if
+If instead, your intent is to conditionally skip execution of the
+loop, you can place the v-if on a wrapper element (or <template>). For
+example:
+
 * vuex
 ** prevent getter caching
 #+BEGIN_SRC javascript
@@ -15,14 +91,36 @@ const one = aGetter()
 router.app.$http...
 #+END_SRC
 
-* $forceUpdate()
-use when the object ({} || []) changes are not reflacted by render
 
 * $options
 access component `name`
 #+BEGIN_SRC javascript
 this.$options.name
 #+END_SRC
+
+* ref
+ref is used to register a reference to an element or a child
+component. The reference will be registered under the parent
+component’s $refs object. If used on a plain DOM element, the
+reference will be that element; if used on a child component, the
+reference will be component instance:
+
+#+BEGIN_SRC html
+<!-- vm.$refs.p will be the DOM node -->
+<p ref="p">hello</p>
+
+<!-- vm.$refs.child will be the child component instance -->
+<child-component ref="child"></child-component>
+#+END_SRC
+
+When used on elements/components with v-for, the registered reference
+will be an Array containing DOM nodes or component instances.
+
+An important note about the ref registration timing: because the refs
+themselves are created as a result of the render function, you cannot
+access them on the initial render - they don’t exist yet! $refs is
+also non-reactive, therefore you should not attempt to use it in
+templates for data-binding.
 
 * :key
 ** reset components on routechange
@@ -64,3 +162,65 @@ The behaviour can be levered out with keep-alive:
   <my-component v-if="isFalse"></my-component>
 </keep-alive>
 #+END_SRC
+
+* Reactivity
+** Objects
+https://vuejs.org/v2/guide/reactivity.html#How-Changes-Are-Tracked
+
+Vue cannot detect property addition or deletion.
+Vue does not allow dynamically adding new root-level reactive
+properties to an already created instance. However, it’s possible to
+add reactive properties to a nested object using the Vue.set(object,
+key, value) method:
+
+
+You can also use the vm.$set instance method, which is an alias to the global Vue.set:
+
+#+BEGIN_SRC javascript
+this.$set(this.someObject, 'b', 2)
+#+END_SRC
+
+Sometimes you may want to assign a number of properties to an existing
+object, for example using Object.assign() or _.extend(). However, new
+properties added to the object will not trigger changes. In such
+cases, create a fresh object with properties from both the original
+object and the mixin object:
+
+#+BEGIN_SRC javascript
+// instead of `Object.assign(this.someObject, { a: 1, b: 2 })`
+this.someObject = Object.assign({}, this.someObject, { a: 1, b: 2 })
+#+END_SRC
+
+** Arrays
+https://vuejs.org/v2/guide/list.html#Caveats
+
+Due to limitations in JavaScript, Vue cannot detect the following changes to an array:
+
+1. When you directly set an item with the index, e.g. vm.items[indexOfItem] = newValue
+2. When you modify the length of the array, e.g. vm.items.length = newLength
+
+To overcome caveat 1, both of the following will accomplish the same
+as vm.items[indexOfItem] = newValue, but will also trigger state
+updates in the reactivity system:
+
+#+BEGIN_SRC javascript
+// Vue.set
+Vue.set(vm.items, indexOfItem, newValue)
+// Array.prototype.splice
+vm.items.splice(indexOfItem, 1, newValue)
+#+END_SRC
+
+You can also use the vm.$set instance method, which is an alias for the global Vue.set:
+
+#+BEGIN_SRC javascript
+vm.$set(vm.items, indexOfItem, newValue)
+#+END_SRC
+
+To deal with caveat 2, you can use splice:
+
+#+BEGIN_SRC javascript
+vm.items.splice(newLength)
+#+END_SRC
+
+** $forceUpdate()
+Use when the object ({} || []) changes are not reflacted by render

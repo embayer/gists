@@ -66,6 +66,22 @@ expandedLog = (function(){
     }
 })()
 #+END_SRC
+
+** objTree
+like a directory listing in the shell
+
+#+BEGIN_SRC javascript
+function objTree (obj) {
+  for (let k in obj) {
+    if (typeof obj[k] == 'object' && obj[k] !== null) {
+      console.group(k)
+      objTree(obj[k])
+      console.groupEnd(k)
+    } else console.log(k)
+  }
+}
+#+END_SRC
+
 * format float
 #+BEGIN_SRC javascript
 function roundedToFixed (value, digits) {
