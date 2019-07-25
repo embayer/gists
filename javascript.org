@@ -528,6 +528,39 @@ arr.sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase()))
 #+END_SRC
 
 * Object
+** function chaining
+#+BEGIN_SRC javascript
+var Kitten = function() {
+  this.name = 'Garfield';
+  this.color = 'brown';
+  this.gender = 'male';
+};
+
+Kitten.prototype.setName = function(name) {
+  this.name = name;
+  return this;
+};
+
+Kitten.prototype.setColor = function(color) {
+  this.color = color;
+  return this;
+};
+
+Kitten.prototype.setGender = function(gender) {
+  this.gender = gender;
+  return this;
+};
+
+Kitten.prototype.save = function() {
+  console.log(
+    'saving ' + this.name + ', the ' +
+    this.color + ' ' + this.gender + ' kitten...'
+  );
+
+  return this;
+};
+#+END_SRC
+
 ** merge
 #+BEGIN_SRC javascript
 const foo = {foo: 1}

@@ -145,6 +145,7 @@ https://developers.google.com/web/tools/chrome-devtools/shortcuts
 | Command+Option+I | Open whatever panel you used last                                                    |
 | Command+Option+J | Open the Console panel                                                               |
 | Command+Option+C | Open the Elements panel                                                              |
+| <Esc>            | Toggle and focus console                                                             |
 
 * Outlook
 
