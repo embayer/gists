@@ -146,6 +146,12 @@ function parseProtocol (url) {
 }
 #+END_SRC
 
+** define object with optional property
+
+#+BEGIN_SRC javascript
+{...[1].length && {optionalProp: true}}
+#+END_SRC
+
 ** object destruction
 
 #+BEGIN_SRC javascript
@@ -173,6 +179,34 @@ const user = {
 };
 const {education: {school: {name}} = {school: {name: 'Dunno'}}} = user;
 console.log(name); //prints: Dunno
+#+END_SRC
+
+** Group by
+#+BEGIN_SRC javascript
+[...l].reduce(function(acc, x, _, arr) {
+    /*
+    Multiselect values are persisted as multiple different objects:
+    [...
+      {name: "answer_pk__863", value: "Vernier caliper", selector: "#id_answer_pk__863"},
+      {name: "answer_pk__863", value: "Shore hardness gauge", selector: "#id_answer_pk__863"},
+      {name: "answer_pk__863", value: "Measuring tape", selector: "#id_answer_pk__863"},
+    ...]
+    We group them here to get:
+    [...
+      {"name":"answer_pk__863","value":["Vernier caliper","Shore hardness gauge","Measuring tape"],"selector":"#id_answer_pk__863"},
+    ...]
+     */
+    var count = arr.filter(y => y.name === x.name).length;
+    if (count > 1) {
+        // lookup if the last element of the accumulator isn't already the thing to group
+        if (acc[acc.length - 1].name !== x.name) {
+            x.value = arr.filter(y => y.name === x.name).map(y => y.value);
+            acc.push(x);
+        }
+        // if so -> omit
+    } else acc.push(x);
+    return acc;
+}, []);
 #+END_SRC
 
 * remove umlaute
@@ -323,24 +357,52 @@ function capitalizeFirstLetter (string) {
 #+END_SRC
 
 * Array
-| Mutating  |                                     |
-|-----------+-------------------------------------|
-| push()    | Insert an element at the end        |
-| pop()     | Remove an element from the end      |
-| unshift() | Inserts an element in the beginning |
-| shift()   | Remove first element                |
+
+| Mutating   | These methods modify the array                                                                                       |
+|------------+----------------------------------------------------------------------------------------------------------------------|
+| push       | Insert an element at the end                                                                                         |
+| pop        | Remove an element from the end                                                                                       |
+| unshift    | Inserts an element in the beginning                                                                                  |
+| shift      | Remove first element                                                                                                 |
+| splice     | Adds and/or removes elements from an array                                                                           |
+| sort       | Sorts the elements of an array in place and returns the array                                                        |
+| reverse    | Reverses the order of the elements of an array in place — the first becomes the last, and the last becomes the first |
+| fill       | Fills all the elements of an array from a start index to an end index with a static value                            |
+| copyWithin | Copies a sequence of array elements within the array                                                                 |
 
 | Iterating |                                                     |
 |-----------+-----------------------------------------------------|
-| forEach() | Iterates an array                                   |
-| filter()  | Iterates an array and result is filtered array      |
-| map()     | Iterates an array and result is new array           |
-| reduce()  | "Reduces" the array into single value (accumulator) |
+| forEach   | Iterates an array                                   |
+| filter    | Iterates an array and result is filtered array      |
+| map       | Iterates an array and result is new array           |
+| reduce    | "Reduces" the array into single value (accumulator) |
 
-| Others    |                                                     |
-|-----------+-----------------------------------------------------|
-| slice()   | Returns desired elements in a new array             |
-| concat()  | Append one or more arrays with given array          |
+| Others |                                            |
+|--------+--------------------------------------------|
+| slice  | Returns desired elements in a new array    |
+| concat | Append one or more arrays with given array |
+
+** compare
+#+BEGIN_SRC javascript
+function arraysEqual(a, b, respectOrder = true) {
+  if (a === b) return true;
+  if (a == null || b == null) return false;
+  if (a.length != b.length) return false;
+
+  if (respectOrder) {
+    var cloneA = a;
+    var cloneB = b;
+  } else {
+    var cloneA = a.sort();
+    var cloneB = b.sort();
+  }
+
+  for (var i = 0; i < cloneA.length; ++i) {
+    if (cloneA[i] !== cloneB[i]) return false;
+  }
+  return true;
+}
+#+END_SRC
 
 ** generate
 *** range
@@ -484,6 +546,11 @@ function getNestedProperty (obj, key) {
 
 * date
 *months are zerobased!*
+** start of week
+#+BEGIN_SRC javascript
+moment().startOf('isoWeek') // monday
+moment().startOf('week') // sunday
+#+END_SRC
 ** translate weekday
 #+BEGIN_SRC javascript
 moment().day('Montag').locale('en').format('dddd')
@@ -636,3 +703,90 @@ parseInt("10", 8); // Result: 8 - because base 8 is specified
 parseInt("0x10"); // Result: 16 - because it begins with 0x
 parseInt("10", 16); // Result: 16 - because base 16 is specified
 #+END_SRC
+
+* localStorage
+*Only stores strings*
+
+** getter for other types
+
+#+BEGIN_SRC javascript
+/* extends localStorage
+ * localStorage stores strings only
+ * this prototype let's you get the real types
+ * usage: localStorage.get('theKey')
+ */
+Storage.prototype.get = function(key) {
+    return JSON.parse(this[key]);
+}
+#+END_SRC
+
+
+** toggle booleans
+
+#+BEGIN_SRC javascript
+/* extends localStorage
+ * toggle a boolean
+ */
+Storage.prototype.toggle = function(key) {
+    var type = typeof JSON.parse(this[key])
+    if (type !== 'boolean') {
+        console.error('Storage.toggle only accepts Booleans');
+        return;
+    }
+    var value = this.hasOwnProperty(key) ? !this.get(key) : true
+    this.setItem(key, value)
+}
+#+END_SRC
+
+* ServiceWorkers
+** Cache on demand
+#+BEGIN_SRC javascript
+// init the on-demand-cache
+self.addEventListener('install', function(event) {
+    // install file needed offline
+    event.waitUntil(
+        caches.open('on-demand-cache')
+            .then(function(cache) {
+                console.log('Opened cache');
+                return cache;
+            })
+    );
+});
+
+self.addEventListener('activate', function(event) {
+    console.log('%c%s', 'border-radius: 0.2rem; padding: 0.2rem; color: white; background-color: CornflowerBlue; font-size: 16px', 'ServiceWorker activated');
+    // prevents `service worker only works correct after pagereload` bug
+    event.waitUntil(self.clients.claim());
+});
+
+// cache everything you fetch
+self.addEventListener('fetch', function(event) {
+    if (event.request.method !== 'GET') return;
+    event.respondWith(
+        caches.match(event.request)
+            .then(function(response) {
+                if (response) return response;
+                var fetchRequest = event.request.clone();
+                return fetch(fetchRequest).then(
+                    function(response) {
+                        // network with cache fallback
+                        if (!response || response.status !== 200 || response.type !== 'basic') {
+                            return response;
+                        }
+                        var responseToCache = response.clone();
+                        caches.open('on-demand-cache')
+                            .then(function(cache) {
+                                cache.put(event.request, responseToCache);
+                            });
+                        return response;
+                    }
+                );
+            })
+    );
+});
+#+END_SRC
+
+
+* On demand cache
+- asynchron
+- lifecycle

@@ -417,7 +417,7 @@ date -r 1551913140000
 
 * make
 ** reference Makefile directory
-#+BEGIN_SRC sh
+#+BEGIN_SRC make
 makefile_dir = $(shell pwd)
 
 distribute:
@@ -426,14 +426,27 @@ distribute:
 #+END_SRC
 
 ** echo
-#+BEGIN_SRC sh
+#+BEGIN_SRC make
 output:
 	@echo Hi there!
 #+END_SRC
 
 **  condition: if file exists -> rename
-#+BEGIN_SRC sh
+#+BEGIN_SRC make
 	@if [ -f file_a ]; then mv file_a file_b; fi
+#+END_SRC
+** multiline strings
+#+BEGIN_SRC sh
+define msg
+Ein neues Release ist live.
+Das Release wurde vom Branch `$(shell git rev-parse --abbrev-ref HEAD)` ($(shell git rev-parse HEAD)) erstellt.
+endef
+export msg
+
+PHONY: echo-msg
+echo-msg:
+	@echo "$$msg"
+	@echo "$$msg" | pbcopy
 #+END_SRC
 
 * npm
