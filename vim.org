@@ -286,6 +286,10 @@ To operate only on the selected text
 | '.       | Jump to the last-changed line.                                                                                                      |
 | 42G      | Jump to line 42 (same as 42gg :42<CR>                                                                                               |
 | zz       | center current line                                                                                                                 |
+| f{char}  | Jump to next occurence of {char} in the current line                                                                                |
+| ;        | Repeat last f{char} jump in the same direction                                                                                      |
+| ,        | Repeat last f{char} jump in the opposit direction                                                                                   |
+| F{char}  | Like f{char} but backwards                                                                                                          |
 
 mx 
 Set mark x at the current cursor position.

@@ -219,3 +219,11 @@ you can indeed receive mail at all the variations with dots.)
 Append a plus ("+") sign and any combination of words or numbers after your
 email address. For example, if your name was hikingfan@gmail.com, you could send
 mail to hikingfan+friends@gmail.com or hikingfan+mailinglists@gmail.com.
+
+* Iterm2
+
+** Reattach Tabs
+
+| shortcut            | description                                                                    |
+|---------------------+--------------------------------------------------------------------------------|
+| <alt>-<shift>-<cmd> | merge a pane back to window or tab bar (<ctrl>-t if only tab on target window) |

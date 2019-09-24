@@ -225,6 +225,8 @@ export function removeUmlauts (str) {
 #+END_SRC
 
 * hash
+
+** simple hash for strings
 #+BEGIN_SRC javascript
 function hash (str) {
   let hash = 0
@@ -237,6 +239,18 @@ function hash (str) {
     hash |= 0 // Convert to 32bit integer
   }
   return hash
+}
+#+END_SRC
+
+** UUID
+#+BEGIN_SRC javascript
+// https://stackoverflow.com/a/2117523
+function uuidv4 () {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
+    const r = Math.random() * 16 | 0
+    const v = c === 'x' ? r : (r & 0x3 | 0x8)
+    return v.toString(16)
+  })
 }
 #+END_SRC
 
@@ -577,6 +591,13 @@ function getNestedProperty (obj, key) {
 }
 #+END_SRC
 
+** check if param is an object != array
+#+BEGIN_SRC javascript
+function isObject (supposedObject) {
+  return (supposedObject === Object(supposedObject) && Object.prototype.toString.call(supposedObject) !== '[object Array]')
+}
+#+END_SRC
+
 * date
 *months are zerobased!*
 ** start of week
@@ -819,7 +840,47 @@ self.addEventListener('fetch', function(event) {
 });
 #+END_SRC
 
+* constants
+** daynames
+#+BEGIN_SRC javascript
+export const DAY_NAMES_EN = {
+  'Montag': 'Monday',
+  'Dienstag': 'Tuesday',
+  'Mittwoch': 'Wednesday',
+  'Donnerstag': 'Thursday',
+  'Freitag': 'Friday',
+  'Samstag': 'Saturday',
+  'Sonntag': 'Sunday'
+}
+#+END_SRC
 
-* On demand cache
-- asynchron
-- lifecycle
+* DOM
+** create nodes
+https://stackoverflow.com/a/35385518
+#+BEGIN_SRC javascript
+/**
+ * @param {String} HTML representing a single element
+ * @return {Element}
+ */
+function htmlToElement(html) {
+    var template = document.createElement('template');
+    html = html.trim(); // Never return a text node of whitespace as the result
+    template.innerHTML = html;
+    return template.content.firstChild;
+}
+
+var td = htmlToElement('<td>foo</td>'),
+    div = htmlToElement('<div><span>nested</span> <span>stuff</span></div>');
+
+/**
+ * @param {String} HTML representing any number of sibling elements
+ * @return {NodeList}
+ */
+function htmlToElements(html) {
+    var template = document.createElement('template');
+    template.innerHTML = html;
+    return template.content.childNodes;
+}
+
+var rows = htmlToElements('<tr><td>foo</td></tr><tr><td>bar</td></tr>');
+#+END_SRC

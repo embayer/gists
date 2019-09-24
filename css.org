@@ -35,6 +35,25 @@ table, th, td {
 }
 #+END_SRC
 
+** even/odd
+Tip: Look at the :nth-of-type() selector to select the element that is the nth child, of a particular type, of its parent.
+#+BEGIN_SRC css
+tbody tr:nth-child(even) {
+  background: #e9e8e9;
+}
+tbody tr:nth-child(odd) {
+  background: #f5f4f5;
+}
+#+END_SRC
+
+** Microsoft Edge invisible borders on position: sticky <th>s/<td>s
+
+#+BEGIN_SRC css
+td th {
+  background-clip: padding-box;
+}
+#+END_SRC
+
 * z-index
 - is inherited
 
