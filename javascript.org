@@ -592,6 +592,16 @@ function getNestedProperty (obj, key) {
 }
 #+END_SRC
 
+** Test for existence of nested JavaScript object key
+https://stackoverflow.com/questions/2631001/test-for-existence-of-nested-javascript-object-key
+#+BEGIN_SRC javascript
+function checkNested(obj, level,  ...rest) {
+  if (obj === undefined) return false
+  if (rest.length == 0 && obj.hasOwnProperty(level)) return true
+  return checkNested(obj[level], ...rest)
+}
+#+END_SRC
+
 ** check if param is an object != array
 #+BEGIN_SRC javascript
 function isObject (supposedObject) {
