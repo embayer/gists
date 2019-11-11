@@ -81,7 +81,7 @@ var expandedLog = (function(MAX_DEPTH){
 | $$                            | documentQueryselectorAll                                                     |
 | $0                            | currently selected element in the Elements panel ($0 ... $4)                 |
 
-*** Special variables
+*** Special functions
 | variable                      | description                             |
 |-------------------------------+-----------------------------------------|
 | getEventListeners(domElement) | Chrome only                             |

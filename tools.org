@@ -450,13 +450,14 @@ echo-msg:
 #+END_SRC
 
 * npm
+https://docs.npmjs.com/about-semantic-versioning
 
 ** SemVer (semantic versioning)
 A simple semver version number looks like this: 1.5.4. These three numbers, left to right, are called:
 
-*** major
-*** minor
-*** and patch versions.
+*** major (X.0.0)
+*** minor (1.X.0)
+*** and patch versions (1.0.X)
 
 A more descriptive way to think of them is as:
 
@@ -527,3 +528,9 @@ by holding special keys while selecting:
 | Option+Mouse | iTerm2, Hyper |
 | Fn+Mouse     | Terminal.app  |
 | Shift+Mouse  | Linux         |
+
+* grep
+
+#+BEGIN_SRC bash
+grep "PATTERN1\|PATTERN2" FILE
+#+END_SRC

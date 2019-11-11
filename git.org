@@ -13,15 +13,6 @@ git log --pretty=format:'%Cgreen%cd%Creset - %s%Creset' --abbrev-commit --date=i
 git log --pretty=format:'%Cgreen%cd%Creset - %s%Creset' --abbrev-commit --date=iso|grep $(date -j -v-1d "+%Y-%m-%d")
 #+END_SRC
 
-* rename
-
-** rename branch
-#+BEGIN_SRC sh
-git branch -m <oldname> <newname>
-# current branch
-git branch -m <newname>
-#+END_SRC
-
 * undo
 
 ** undo last commit
@@ -115,81 +106,86 @@ etc...                 *     2. commit on master
 #+end_src
 
 
-** fetch and pull all remote branches
+* fetch and pull all remote branches
 #+BEGIN_SRC sh
 git branch -r | grep -v '\->' | while read remote; do git branch --track "${remote#origin/}" "$remote"; done
 git fetch --all
 git pull --all
 #+END_SRC
 
-** grep in git history
+* grep in git history
 #+BEGIN_SRC sh
     git grep <regexp> $(git rev-list --all)
     # or
     git rev-list --all | xargs git grep expression
 #+END_SRC
 
-** force overwrite pull
+* grep in log history
+#+BEGIN_SRC sh
+    git log --grep <regexp>
+#+END_SRC
+
+* force overwrite pull
 #+BEGIN_SRC sh
     git fetch --all
     git reset --hard origin/master
 #+END_SRC
 
-** delete a tag
+* delete a tag
 #+BEGIN_SRC sh
     git tag -d <tagname>
     git push origin :refs/tags/<tagname>
 #+END_SRC
 
-** delete a branch
+* delete a branch
 #+BEGIN_SRC sh
     git push origin --delete <branchName>
 #+END_SRC
 
-** show merge status of a branch
+* show merge status of a branch
 #+BEGIN_SRC sh
     git branch --merged
     git branch --no-merged
 #+END_SRC
 
-** show the entire history of the file (including history beyond renames and with diffs for each change).
+* show the entire history of the file (including history beyond renames and with diffs for each change).
 #+BEGIN_SRC sh
     git log --follow -p -- filename
 #+END_SRC
 
-** show logs of today in a compact view
+* show logs of today in a compact view
 #+BEGIN_SRC sh
     git log --since="yesterday" --pretty="oneline"
 #+END_SRC
 
-** stash (useful too, when working on the wrong branch)
+* stash (useful too, when working on the wrong branch)
 #+BEGIN_SRC sh
     git stash
     git stash apply
 #+END_SRC
 
-** show staged diffs
+* show staged diffs
 #+BEGIN_SRC sh
     git diff --cached
 #+END_SRC
 
-** show diffs between two commits
+* show diffs between two commits
 #+BEGIN_SRC sh
     git diff <commit-id>..<commit-id>
     git diff <tag-name || branch-name> <file>
 #+END_SRC
 
-** export
+* export
 #+BEGIN_SRC sh
     git archive <branch-name> --format=zip --output=<file>
 #+END_SRC
 
-** push local branch
+* push local branch
 #+BEGIN_SRC sh
     git push -u origin feature_branch_name
 #+END_SRC
 
-** show commits in a time interval
+* show commits in a time interval
 #+BEGIN_SRC sh
     git log --after="2015-11-13 00:00" --before="2015-11-16 23:59"
 #+END_SRC
@@ -313,3 +309,32 @@ git remote add <remotename> <git-url>
 git checkout -b <branchname>
 git pull <remotename> <branchname>
 #+END_SRC
+
+* Rename a Local and Remote Git Branch
+
+#+BEGIN_SRC sh
+# Start by switching to the local branch which you want to rename:
+git checkout <old_name>
+
+# Rename the local branch by typing:
+git branch -m <new_name>
+
+# If you’ve already pushed the <old_name> branch to the remote repository delete the <old_name> remote branch:
+git push origin --delete <old_name>
+
+# Finally, push the <new_name> local branch and reset the upstream branch:
+git push origin -u <new_name>
+#+END_SRC
+
+* merge
+
+* ignore whitespace / indentation
+https://stackoverflow.com/questions/5256769/git-merge-and-fixing-mixed-spaces-and-tabs-with-two-branches
+
+#+BEGIN_SRC shell
+git merge -s recursive -Xignore-space-change
+#+END_SRC
+
+- If their version only introduces whitespace changes to a line, our version is used
+- If our version introduces whitespace changes but their version includes a substantial change, their version is used
+- Otherwise, the merge proceeds in the usual way
