@@ -29,6 +29,7 @@ git log --pretty=format:'%Cgreen%cd%Creset - %s%Creset' --abbrev-commit --date=i
 #+END_SRC
 
 ** moving to a new branch
+https://stackoverflow.com/a/1628584
 
 move commits to a new branch
 
@@ -48,6 +49,7 @@ But do make sure how many commits to go back. Alternatively, you can instead of 
 *1 You will only be "losing" commits from the master branch, but don't worry, you'll have those commits in newbranch!
 
 ** moving to an existing branch
+https://stackoverflow.com/a/1628584
 
 WARNING The method above works because you are creating a new branch with the first command: git branch newbranch. If you want to use an existing branch you need to merge your changes into the existing branch before executing git reset --hard HEAD~3. If you don't merge your changes first, they will be lost. So, if you are working with an existing branch it will look like this:
 

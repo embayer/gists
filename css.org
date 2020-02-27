@@ -85,3 +85,85 @@ input:valid+span:after {
 
 * Centering
 https://css-tricks.com/centering-css-complete-guide/
+
+* Hover
+** Set color for child element on parent:hover
+
+#+BEGIN_SRC css
+/*<div class="my-class"><p>White on hover</p></div>*/
+  .my-class:hover p {
+    color: white;
+  }
+#+END_SRC
+
+* Grid
+** Definition
+#+BEGIN_SRC css
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+grid-template-rows: repeat(3, 1fr);
+#+END_SRC
+
+** Fixed height
+#+BEGIN_SRC css
+grid-auto-rows: 30px;
+#+END_SRC
+
+** Position elements
+#+BEGIN_SRC css
+grid-row-start: 1;
+grid-column-start: 2;
+grid-row-end: 3;
+grid-column-end: 4;
+
+/*shorthand*/
+grid-area: 1 / 2 / 3 / 4;
+/*grid-row-start grid-column-start grid-row-end grid-column-end*/
+#+END_SRC
+
+* Flexbox
+** Align left and right
+#+BEGIN_SRC html
+<div id="container">
+  <div id="a">a</div>
+  <div id="b">b</div>
+</div>
+#+END_SRC
+#+BEGIN_SRC css
+#container {
+    display: flex;
+    justify-content: space-between;
+}
+#+END_SRC
+
+* Circle with text
+https://code-boxx.com/css-circles-text/#sec-text
+#+BEGIN_SRC html
+<div class="res-circle">
+  <div class="circle-txt">{{qualifikation.name}}</div>
+</div>
+#+END_SRC
+#+BEGIN_SRC css
+.res-circle {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  line-height: 0;
+  background: #bcd6ff;
+  position: relative;
+}
+.res-circle:after {
+  content: "";
+  display: block;
+  padding-bottom: 100%;
+}
+.circle-txt {
+  position: absolute;
+  bottom: 50%;
+  width: 100%;
+  text-align: center;
+  font-family: arial, sans-serif;
+  font-size: xx-small;
+  font-weight: bold;
+}
+#+END_SRC

@@ -6,9 +6,13 @@
 ** paraminfo
 ** regex help
 ** quick docu
-
-
 ** expand selection
+** hippie complete
+https://www.jetbrains.com/help/webstorm/auto-completing-code.html
+
+* Icon / Symbol reference
+https://www.jetbrains.com/help/idea/symbols.html
+
 * Switching files
 | shortcut     | description                          |
 |--------------+--------------------------------------|

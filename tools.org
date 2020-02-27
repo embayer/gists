@@ -534,3 +534,14 @@ by holding special keys while selecting:
 #+BEGIN_SRC bash
 grep "PATTERN1\|PATTERN2" FILE
 #+END_SRC
+
+* cd
+
+** goto ~
+#+BEGIN_SRC shell
+cd
+# or
+~
+# or
+cd ~
+#+END_SRC

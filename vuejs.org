@@ -224,3 +224,24 @@ vm.items.splice(newLength)
 
 ** $forceUpdate()
 Use when the object ({} || []) changes are not reflacted by render
+
+* Vueinstance
+** access this.data within the instance
+#+BEGIN_SRC javascript
+// vueinstance.js
+import Vue from 'vue'
+import store from './store'
+
+const myVueinstance = new Vue({
+  data: {
+    someData: 1337
+  },
+  methods: {
+    aMethod () {
+      console.log(this._data.someData)
+    },
+  }
+}
+
+export default myVueinstance
+#+END_SRC
