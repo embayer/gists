@@ -18,6 +18,19 @@
 * Tables
 - tds inherit width from ths
 
+** Sync vertically stacked tables column widths
+#+BEGIN_SRC css
+table {
+  table-layout: fixed;
+}
+.table-col-1 {
+  width: 20%;
+}
+.table-col-2 {
+  width: 80%;
+}
+#+END_SRC
+
 ** Elements in tables are vertically centered
 
 #+BEGIN_SRC css
