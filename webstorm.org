@@ -88,3 +88,8 @@ A special variant of the Code Completion feature invoked by pressing ⌃Space tw
 
 
 move line
+
+* Replace
+** Backreference
+logging\.fetched\((.*)\)
+console.log('%c ' + `📫 fetched: \${$1}`, 'color: MediumSlateBlue; font-weight: bold;')

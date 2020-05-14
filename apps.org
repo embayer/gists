@@ -111,7 +111,7 @@ https://support.mozilla.org/en-US/kb/how-search-from-address-bar?redirectlocale=
 - Visit the page on the target website that has the search field that you would normally use to search the site.
 - Hold down the Ctrl key while you click on the search field. Select Add a Keyword for this Search....
 - The Add Bookmark dialog appears. Enter an appropriate name for the bookmark (e.g. "The Internet Movie Database"). Create a keyword (e.g. "imdb").
-- Select the bookmark folder to contain the smart keyword. Click OK. 
+- Select the bookmark folder to contain the smart keyword. Click OK.
 - To use the created smart bookmark, enter the keyword and the search string in the Location bar and then press Return. 
 
 ** about:config

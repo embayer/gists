@@ -61,6 +61,72 @@ computed: {
   }
 #+END_SRC
 
+** watchers
+
+*** Animate change of a property
+#+BEGIN_SRC html
+<div :class="{change: changes['x']}">x</div>
+<div :class="{change: changes['y']}">y</div>
+#+END_SRC
+#+BEGIN_SRC js
+    data () {
+      return {
+        badges: {x: 0, y: 0},
+        changes: {x: false, y: false}
+      }
+    },
+    watch: {
+      badges (val, oldVal) {
+        const changedKey = (() => {
+          for (const key in val) {
+            if (!val.hasOwnProperty(key)) continue
+            if (val[key] !== oldVal[key]) return key
+          }
+        })()
+        this.changes[changedKey] = true
+        setTimeout(() => (this.changes[changedKey] = false), 700)
+      }
+    }
+#+END_SRC
+#+BEGIN_SRC css
+@keyframes bounce-in {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+  .change {
+    animation: bounce-in .5s;
+  }
+#+END_SRC
+
+** watch object property
+#+BEGIN_SRC javascript
+watch: {
+  'filters.date' (newVal, oldVal) {
+    console.log(`filters.date changed from ${oldVal} to ${newVal}`})
+  }
+}
+#+END_SRC
+
+** watch object
+#+BEGIN_SRC javascript
+watch: {
+  filters: {
+    handler (newVal, oldVal) {
+      console.log(`filters.date changed from ${oldVal} to ${newVal}`})
+    },
+    deep: true
+  }
+}
+#+END_SRC
+
 * v-for
 ** With range
 #+BEGIN_SRC html
@@ -245,3 +311,49 @@ const myVueinstance = new Vue({
 
 export default myVueinstance
 #+END_SRC
+
+* Components
+** Bootstrap toggle button
+with boolean binding
+#+BEGIN_SRC html
+<div class="btn-group btn-group-toggle" data-toggle="buttons">
+  <label
+    :class="{active: filters.erledigteAnzeigen}"
+    class="btn btn-secondary"
+  >
+    <input
+      v-model="filters.erledigteAnzeigen"
+      :value="true"
+      type="radio"
+      autocomplete="off"
+    > Nur offene
+  </label>
+  <label
+    :class="{active: !filters.erledigteAnzeigen}"
+    class="btn btn-secondary"
+  >
+    <input
+      v-model="filters.erledigteAnzeigen"
+      :value="false"
+      type="radio"
+      autocomplete="off"
+    > Auch erledigte
+  </label>
+</div>
+#+END_SRC
+
+* Reference data variable from another data variable
+#+BEGIN_SRC javascript
+data() {
+    return {
+      names: [],
+    }
+},
+computed: {
+    length() {
+        return this.names.length;
+    }
+}
+#+END_SRC
+If it has to be writable use:
+https://vuejs.org/v2/guide/computed.html#Computed-Setter
