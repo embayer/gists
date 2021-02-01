@@ -117,7 +117,6 @@ ls *.{mp3,exe,mp4}
     sed -n 's/.*href="\([^"]*\).*/\1/p' file
 #+END_SRC
 
-
 ** delete lines containing pattern (inline)
 #+BEGIN_SRC sh
     sed -i '' '/<pattern>/d' file
@@ -241,6 +240,11 @@ ls *.{mp3,exe,mp4}
     # file.bak is the backup; file will be edited
     sed -i .bak "/<pattern>/d" file
 #+end_src
+
+** change delimiter from `,` to `;`
+#+BEGIN_SRC sh
+sed -i -e 's/,\([^ ]\)/\;\1/g' export.csv
+#+END_SRC
 
 * tail
 

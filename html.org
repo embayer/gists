@@ -1,3 +1,21 @@
+* Tables
+** Splitting a table cell into two columns (table in table)
+#+BEGIN_SRC html
+<table border="1">
+  <tr>
+    <th scope="col">Header</th>
+    <th scope="col">Header</th>
+    <th scope="col" colspan="2">Header</th>
+  </tr>
+  <tr>
+    <th scope="row">&nbsp;</th>
+    <td>&nbsp;</td>
+    <!-- The following two cells will appear under the same header -->
+    <td>Col 1</td>
+    <td>Col 2</td>
+  </tr>
+</table>
+#+END_SRC
 * Semantic
 https://dev.to/kenbellows/stop-using-so-many-divs-an-intro-to-semantic-html-3i9i
 

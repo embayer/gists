@@ -854,6 +854,20 @@ const v = state.appointments.mitarbeiter.reduce((acc, value) => {
   }, 0)
 }, 0)
 #+END_SRC
+*** Find lowest value in array, given an order array
+#+BEGIN_SRC javascript
+/* findLowest(['c', 'b'], ['a', 'b', 'c'])
+ * // => 'b'
+ */
+function findLowest (arr, order) {
+  const idx = arr.reduce((acc, x, idx) => {
+    const orderIdx = order.findIndex(y => y === x)
+    if (orderIdx < acc.order) acc = {order: orderIdx, arr: idx}
+    return acc
+  }, {order: arr.length, arr: 0})
+  return arr[idx.arr]
+}
+#+END_SRC
 ** filter
 ** find
 ** stream
@@ -1150,5 +1164,18 @@ function setCookie (name, value, exdays = 1) {
   d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000))
   const expires = `expires=${d.toUTCString()}`
   document.cookie = `${name}=${value};${expires};path=/`
+}
+#+END_SRC
+
+* Hamming Distance
+#+BEGIN_SRC javascript
+function hammingDistance (a, b) {
+  let d = 0
+  let h = a ^ b
+  while (h > 0) {
+    d++
+    h &= h - 1
+  }
+  return d
 }
 #+END_SRC

@@ -357,3 +357,12 @@ computed: {
 #+END_SRC
 If it has to be writable use:
 https://vuejs.org/v2/guide/computed.html#Computed-Setter
+
+* Postmortems / Lessons learned
+** Checkbox change not reflected in $store
+#+BEGIN_SRC javascript
+state.x.y = true
+// mutation
+state.x = {} // reference lost
+state.x.y = false
+#+END_SRC
