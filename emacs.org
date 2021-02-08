@@ -244,11 +244,24 @@
 *** repeated tasks
 
 #+begin_src org
-     ** TODO Pay the rent
+ ** TODO Pay the rent
         DEADLINE: <2005-10-01 Sat +1m>
 #+end_src
 
 where y/w/m/d/h can be used
+
+*** subtasks
+To keep an overview of the fraction of subtasks that have already been
+marked as done, insert either ‘[/]’ or ‘[%]’ anywhere in the
+headline. These cookies are updated each time the TODO status of a
+child changes, or when pressing C-c C-c on the cookie. For example:
+
+**** Organize Party [33%]
+***** TODO Call people [1/2]
+****** TODO Peter
+****** DONE Sarah
+***** TODO Buy food
+***** DONE Talk to neighbor
 
 ** timestamps
 

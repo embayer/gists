@@ -771,6 +771,22 @@ function isObject (supposedObject) {
 * date
 *months are zerobased!*
 
+** timestring <-> minutes
+#+BEGIN_SRC javascript
+/* getMinutesFromTimeString('01:30')
+ * // => 90
+ */
+export function getMinutesFromTimeString (timeString) {
+  return moment(timeString, 'HH:mm').diff(moment('00:00', 'HH:mm'), 'minutes')
+}
+/* getTimeStringFromMinutes(65)
+ * // => '01:05'
+ */
+export function getTimeStringFromMinutes (minutes) {
+  return moment('00:00', 'HH:mm').add(minutes, 'minutes').format('HH:mm')
+}
+#+END_SRC
+
 ** create date "without" time
 #+BEGIN_SRC javascript
 moment().startOf('day')
